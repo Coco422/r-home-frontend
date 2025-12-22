@@ -1,5 +1,5 @@
-import { Heart } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { Heart } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -11,12 +11,12 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Copyright */}
           <p className="text-muted-foreground text-sm">
-            © {currentYear} 安落樱. {t('footer.rights')}.
+            © {currentYear} 安落滢. {t("footer.rights")}.
           </p>
 
           {/* Built with */}
           <p className="text-muted-foreground text-sm flex items-center gap-1">
-            {t('footer.builtWith')} <Heart className="h-4 w-4 text-destructive fill-destructive" />
+            {t("footer.builtWith")} <Heart className="h-4 w-4 text-destructive fill-destructive" />
           </p>
 
           {/* Quick links */}

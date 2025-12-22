@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { Menu, X, Globe } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { useState, useEffect } from "react";
+import { Menu, X, Globe } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const Navbar = () => {
   const { language, setLanguage, t } = useLanguage();
@@ -13,35 +13,33 @@ const Navbar = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navLinks = [
-    { href: '#about', label: t('nav.about') },
-    { href: '#projects', label: t('nav.projects') },
-    { href: '#skills', label: t('nav.skills') },
-    { href: '#contact', label: t('nav.contact') },
+    { href: "#about", label: t("nav.about") },
+    { href: "#projects", label: t("nav.projects") },
+    { href: "#skills", label: t("nav.skills") },
+    { href: "#contact", label: t("nav.contact") },
   ];
 
   const toggleLanguage = () => {
-    setLanguage(language === 'zh' ? 'en' : 'zh');
+    setLanguage(language === "zh" ? "en" : "zh");
   };
 
   return (
     <header
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        isScrolled
-          ? 'bg-background/80 backdrop-blur-md border-b border-border shadow-sm'
-          : 'bg-transparent'
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        isScrolled ? "bg-background/80 backdrop-blur-md border-b border-border shadow-sm" : "bg-transparent",
       )}
     >
       <nav className="section-container">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <a href="#" className="text-xl font-bold text-foreground">
-            安落樱
+            安落滢
           </a>
 
           {/* Desktop Navigation */}
@@ -55,31 +53,18 @@ const Navbar = () => {
                 {link.label}
               </a>
             ))}
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={toggleLanguage}
-              className="gap-2"
-            >
+            <Button variant="ghost" size="sm" onClick={toggleLanguage} className="gap-2">
               <Globe className="h-4 w-4" />
-              {language === 'zh' ? 'EN' : '中文'}
+              {language === "zh" ? "EN" : "中文"}
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-2 md:hidden">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleLanguage}
-            >
+            <Button variant="ghost" size="icon" onClick={toggleLanguage}>
               <Globe className="h-4 w-4" />
             </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
+            <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
               {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
