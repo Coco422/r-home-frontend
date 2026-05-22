@@ -1,0 +1,29 @@
+{
+  "mode": "edit",
+  "model": "gpt-image-2",
+  "size_requested": "1024x1024",
+  "prompt": "Transform the exact three Chinese characters 安落滢 into elegant pure Chinese ink calligraphy, expressive brush strokes, refined literati style, black ink only, transparent background, no frame, no seal, no extra marks, no additional text, keep the characters legible and in the exact order 安落滢.",
+  "source": "b64_json",
+  "output": "assets/source/gpt-image2/name-anluoying-ink-raw.png",
+  "image": {
+    "format": "png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 890604
+  },
+  "created": 1779440692,
+  "usage": {
+    "input_tokens": 604,
+    "input_tokens_details": {
+      "image_tokens": 512,
+      "text_tokens": 92
+    },
+    "output_tokens": 781,
+    "output_tokens_details": {
+      "image_tokens": 781,
+      "text_tokens": 0
+    },
+    "total_tokens": 1385
+  },
+  "revised_prompt": "Create elegant pure Chinese ink calligraphy of the exact three Chinese characters 安落滢, in that exact order, large and clearly legible. Style: refined literati brush calligraphy, expressive brush strokes, authentic black Chinese ink only. Background must be transparent. No frame, no seal, no border, no extra marks, no additional text, no decoration. Centered composition, clean isolated characters suitable for transparent PNG."
+}

@@ -1,0 +1,21 @@
+{
+  "mode": "generate",
+  "model": "gpt-image-2-b",
+  "size_requested": "1024x1024",
+  "prompt": "Hero symbol for a personal homepage of full-stack engineer 安落滢 / Ray. A sweeping Chinese ink brush crescent dissolving into precise circuit board traces, quiet deep charcoal, ivory ink, muted jade accent, sparse copper node lines, large negative space, elegant and cool, no readable text, no face, no clutter, suitable as a homepage hero visual.",
+  "source": "b64_json",
+  "output": "/Volumes/extStorage/Projects/Ray/r-home-frontend/assets/source/gpt-image2/previews/07-hero-symbol-circuit-brush.png",
+  "image": {
+    "format": "png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 1308056
+  },
+  "created": 1779351721,
+  "usage": {
+    "input_tokens": 99,
+    "output_tokens": 196,
+    "total_tokens": 295
+  },
+  "revised_prompt": null
+}

@@ -1,0 +1,21 @@
+{
+  "mode": "generate",
+  "model": "gpt-image-2-b",
+  "size_requested": "1024x1024",
+  "prompt": "Monogram seal study for Ray, inspired by a small black and white rounded-square blog logo combining R and y. Create a refined digital private seal: white rounded square on deep black, stylized R and y fused like calligraphy and circuit geometry, high contrast, minimal, elegant, no other text, no face, icon-ready.",
+  "source": "b64_json",
+  "output": "/Volumes/extStorage/Projects/Ray/r-home-frontend/assets/source/gpt-image2/previews/06-ray-digital-seal.png",
+  "image": {
+    "format": "png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 498132
+  },
+  "created": 1779351723,
+  "usage": {
+    "input_tokens": 135,
+    "output_tokens": 1756,
+    "total_tokens": 1891
+  },
+  "revised_prompt": null
+}

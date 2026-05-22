@@ -1,0 +1,21 @@
+{
+  "mode": "generate",
+  "model": "gpt-image-2-b",
+  "size_requested": "1024x1024",
+  "prompt": "Homepage moodboard for a personal website of a full-stack engineer named Ray / 安落滢. Modern Chinese ink-wash inspiration, serene white paper, soft gray brush ink, mist and mountain silhouettes, a small vermilion seal accent, abstract river lines, poetic negative space, quiet and elegant, no face, no readable text, no ornate costume, no clutter.",
+  "source": "b64_json",
+  "output": "/Volumes/extStorage/Projects/Ray/r-home-frontend/assets/source/gpt-image2/previews/03-ink-wash.png",
+  "image": {
+    "format": "png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 1365806
+  },
+  "created": 1779351058,
+  "usage": {
+    "input_tokens": 110,
+    "output_tokens": 1756,
+    "total_tokens": 1866
+  },
+  "revised_prompt": null
+}

@@ -1,0 +1,21 @@
+{
+  "mode": "generate",
+  "model": "gpt-image-2-b",
+  "size_requested": "1024x1024",
+  "prompt": "Homepage moodboard for a personal website of a full-stack engineer named Ray / 安落滢. Premium mosaic and voxel-inspired design, small tiles, polished block geometry, slate, pearl, muted sea-green and charcoal palette, architectural and quiet, subtle digital texture, abstract symbol, no face, no readable text, not childish, not game-like, more editorial than playful.",
+  "source": "b64_json",
+  "output": "/Volumes/extStorage/Projects/Ray/r-home-frontend/assets/source/gpt-image2/previews/04-mosaic-voxel.png",
+  "image": {
+    "format": "png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 1684849
+  },
+  "created": 1779351056,
+  "usage": {
+    "input_tokens": 121,
+    "output_tokens": 1756,
+    "total_tokens": 1877
+  },
+  "revised_prompt": null
+}

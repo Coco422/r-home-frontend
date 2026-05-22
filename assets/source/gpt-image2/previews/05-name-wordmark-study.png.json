@@ -1,0 +1,21 @@
+{
+  "mode": "generate",
+  "model": "gpt-image-2-b",
+  "size_requested": "1024x1024",
+  "prompt": "Logo and title treatment study for a personal homepage. Main Chinese name should be the exact characters 安落滢, calligraphic but restrained, ink brush texture merging into fine circuit traces, black charcoal background, ivory strokes, one jade dot, small copper circuit lines, elegant premium minimalism, no face, no extra words, no garbled text.",
+  "source": "b64_json",
+  "output": "/Volumes/extStorage/Projects/Ray/r-home-frontend/assets/source/gpt-image2/previews/05-name-wordmark-study.png",
+  "image": {
+    "format": "png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 1750621
+  },
+  "created": 1779351722,
+  "usage": {
+    "input_tokens": 113,
+    "output_tokens": 1756,
+    "total_tokens": 1869
+  },
+  "revised_prompt": null
+}

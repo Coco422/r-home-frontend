@@ -1,0 +1,21 @@
+{
+  "mode": "generate",
+  "model": "gpt-image-2-b",
+  "size_requested": "1024x1024",
+  "prompt": "Homepage moodboard for Ray / 安落滢. Minimal color-block editorial design, three or four large modular panels, off-white base, muted teal, indigo and copper accents, clean grid, elegant asymmetry, subtle paper grain, calm and premium, no face, no readable text, no clutter.",
+  "source": "b64_json",
+  "output": "/Volumes/extStorage/Projects/Ray/r-home-frontend/assets/source/gpt-image2/previews/02-color-block.png",
+  "image": {
+    "format": "png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 1536551
+  },
+  "created": 1779351268,
+  "usage": {
+    "input_tokens": 108,
+    "output_tokens": 1756,
+    "total_tokens": 1864
+  },
+  "revised_prompt": null
+}

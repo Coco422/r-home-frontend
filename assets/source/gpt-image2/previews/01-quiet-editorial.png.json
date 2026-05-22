@@ -1,0 +1,21 @@
+{
+  "mode": "generate",
+  "model": "gpt-image-2-b",
+  "size_requested": "1024x1024",
+  "prompt": "Homepage moodboard for a personal website of a full-stack engineer named Ray / 安落滢. Quiet premium editorial design, deep charcoal and soft ivory, one subtle jade accent, abstract symbol inspired by brush strokes and circuit traces, large negative space, refined modern layout, no face, no readable text, no clutter, elegant and cool.",
+  "source": "b64_json",
+  "output": "/Volumes/extStorage/Projects/Ray/r-home-frontend/assets/source/gpt-image2/previews/01-quiet-editorial.png",
+  "image": {
+    "format": "png",
+    "width": 1024,
+    "height": 1024,
+    "bytes": 1448385
+  },
+  "created": 1779350929,
+  "usage": {
+    "input_tokens": 113,
+    "output_tokens": 1756,
+    "total_tokens": 1869
+  },
+  "revised_prompt": null
+}
