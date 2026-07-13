@@ -4,4 +4,5 @@ export const profile = {
   motto: "知者行之始，行者知之成",
   githubUrl: "https://github.com/Coco422",
   blogUrl: "https://blog.anluoying.com",
+  toolsUrl: "/tools/",
 };

@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 import { profile } from "./content/profile";
+import { ToolsIndex } from "./tools/ToolsIndex";
+import { VramCalculator } from "./tools/VramCalculator";
 
 const preloadAssets = [
   "/media/hero-symbol.webp",
@@ -14,15 +16,23 @@ const navLinks = [
     label: "文",
     ariaLabel: "打开个人博客",
     href: profile.blogUrl,
+    external: true,
   },
   {
     label: "码",
     ariaLabel: "打开 GitHub 主页",
     href: profile.githubUrl,
+    external: true,
+  },
+  {
+    label: "器",
+    ariaLabel: "打开工具页",
+    href: profile.toolsUrl,
+    external: false,
   },
 ];
 
-function App() {
+function HomePage() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [audioState, setAudioState] = useState<"loading" | "playing" | "paused">("loading");
   const [loadProgress, setLoadProgress] = useState(0.04);
@@ -195,7 +205,7 @@ function App() {
 
           <nav className="topnav" aria-label="站点入口">
             {navLinks.map((link) => (
-              <a key={link.href} className="topnav-link" href={link.href} target="_blank" rel="noreferrer" aria-label={link.ariaLabel}>
+              <a key={link.href} className="topnav-link" href={link.href} target={link.external ? "_blank" : undefined} rel={link.external ? "noreferrer" : undefined} aria-label={link.ariaLabel}>
                 {link.label}
               </a>
             ))}
@@ -236,6 +246,14 @@ function App() {
       </main>
     </div>
   );
+}
+
+function App() {
+  const pathname = window.location.pathname.replace(/\/+$/, "") || "/";
+
+  if (pathname === "/tools") return <ToolsIndex />;
+  if (pathname === "/tools/vram-calculator") return <VramCalculator />;
+  return <HomePage />;
 }
 
 export default App;
