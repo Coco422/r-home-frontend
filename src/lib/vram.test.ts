@@ -4,6 +4,7 @@ import {
   exceedsContextWindow,
   getModel,
   GPUS,
+  MODELS,
   PRECISIONS,
 } from "./vram";
 
@@ -81,6 +82,28 @@ describe("estimateVram", () => {
     expect(exceedsContextWindow({ ...windowEdge, outputTokens: 4097 })).toBe(
       true,
     );
+  });
+
+  it("includes mainstream dense and MoE model profiles", () => {
+    expect(Object.keys(MODELS)).toHaveLength(48);
+    expect(MODELS["qwen3-coder-480b-a35b"].contextWindow).toBe(262_144);
+    expect(MODELS["qwen2-5-72b"].layers).toBe(80);
+    expect(MODELS["llama-3-1-405b"].totalParametersB).toBeCloseTo(
+      405.853,
+    );
+    expect(MODELS["deepseek-v3"].activeParametersB).toBe(37);
+    expect(MODELS["deepseek-r1-distill-qwen-1-5b"].totalParametersB).toBe(
+      1.777,
+    );
+    expect(MODELS["deepseek-r1-32b"].totalParametersB).toBeCloseTo(32.764);
+    expect(MODELS["deepseek-r1-distill-llama-70b"].layers).toBe(80);
+    expect(MODELS["ernie-4-5-300b-a47b"].category).toBe(
+      "Hunyuan / ERNIE / MiniMax",
+    );
+    expect(MODELS["gpt-oss-20b"].kvElementsPerToken).toBe(
+      2 * 12 * 8 * 64,
+    );
+    expect(MODELS["gemma-3-27b"].category).toBe("Gemma");
   });
 
   it("includes mainstream local, workstation, data-center, Apple and accelerator devices", () => {

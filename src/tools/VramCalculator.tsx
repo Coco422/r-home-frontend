@@ -5,11 +5,14 @@ import {
   type CSSProperties,
   type ReactNode,
 } from "react";
+import { CalculatorFaq } from "./CalculatorFaq";
+import { DeploymentPrice } from "./DeploymentPrice";
 import { InferenceExperience } from "./InferenceExperience";
 import {
   DEFAULT_CALCULATOR_INPUT,
   GPUS,
   GPU_CATEGORIES,
+  MODEL_CATEGORIES,
   MODELS,
   PRECISIONS,
   RESERVES,
@@ -211,6 +214,12 @@ export function VramCalculator() {
     estimate.totalPerGpuGiB - parts.weights - parts.kv - parts.workspace,
   );
   const visualMax = Math.max(estimate.totalPerGpuGiB, estimate.gpu.memoryGiB);
+  const modelCategoryOptions = MODEL_CATEGORIES.map((category) => ({
+    category,
+    models: Object.entries(MODELS).filter(
+      ([, model]) => model.category === category,
+    ),
+  })).filter((group) => group.models.length > 0);
   const categoryOptions = GPU_CATEGORIES.map((category) => ({
     category,
     devices: Object.entries(GPUS).filter(
@@ -257,10 +266,14 @@ export function VramCalculator() {
                       update({ modelId: event.target.value as ModelId })
                     }
                   >
-                    {Object.entries(MODELS).map(([id, model]) => (
-                      <option key={id} value={id}>
-                        {model.label}
-                      </option>
+                    {modelCategoryOptions.map(({ category, models }) => (
+                      <optgroup key={category} label={category}>
+                        {models.map(([id, model]) => (
+                          <option key={id} value={id}>
+                            {model.label}
+                          </option>
+                        ))}
+                      </optgroup>
                     ))}
                   </select>
                 </Field>
@@ -484,82 +497,96 @@ export function VramCalculator() {
             </ConfigSection>
           </section>
 
-          <aside className="result-card" aria-live="polite">
-            <div className="result-card-top">
-              <span>
-                {contextExceedsWindow
-                  ? "超过模型窗口"
-                  : statusLabels[displaySafety]}
-              </span>
-              <button type="button" onClick={() => void copySummary()}>
-                复制
-              </button>
-            </div>
-            <div className="result-main">
-              <div
-                className="result-dial"
-                style={
-                  {
-                    "--dial": Math.min(1, estimate.utilization),
-                    "--dial-color": dialColor(displaySafety),
-                  } as CSSProperties
-                }
-              >
-                <b>{Math.round(estimate.utilization * 100)}%</b>
+          <div className="result-stack">
+            <aside className="result-card" aria-live="polite">
+              <div className="result-card-top">
+                <span>
+                  {contextExceedsWindow
+                    ? "超过模型窗口"
+                    : statusLabels[displaySafety]}
+                </span>
+                <button type="button" onClick={() => void copySummary()}>
+                  复制
+                </button>
               </div>
-              <div>
-                <strong>
-                  {formatGiB(estimate.totalPerGpuGiB)} <small>GiB</small>
-                </strong>
-                <p>
-                  {estimate.gpu.label} × {config.gpuCount}
-                </p>
+              <div className="result-main">
+                <div
+                  className="result-dial"
+                  style={
+                    {
+                      "--dial": Math.min(1, estimate.utilization),
+                      "--dial-color": dialColor(displaySafety),
+                    } as CSSProperties
+                  }
+                >
+                  <b>{Math.round(estimate.utilization * 100)}%</b>
+                </div>
+                <div>
+                  <strong>
+                    {formatGiB(estimate.totalPerGpuGiB)} <small>GiB</small>
+                  </strong>
+                  <p>
+                    {estimate.gpu.label} × {config.gpuCount}
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="result-bar">
-              <i
-                className="weights"
-                style={{ width: size(parts.weights, visualMax) }}
-              />
-              <i className="kv" style={{ width: size(parts.kv, visualMax) }} />
-              <i
-                className="workspace"
-                style={{ width: size(parts.workspace, visualMax) }}
-              />
-              <i
-                className="runtime"
-                style={{ width: size(runtime, visualMax) }}
-              />
-            </div>
-            <div className="result-parts">
-              <ResultPart label="权重" value={parts.weights} />
-              <ResultPart label="KV" value={parts.kv} />
-              <ResultPart label="工作区" value={parts.workspace} />
-              <ResultPart label="运行时 / 预留" value={runtime} />
-            </div>
-            <div className="result-metrics">
-              <Metric
-                label="总吞吐"
-                value={formatNumber(estimate.performance.totalTokensPerSecond)}
-                unit="tok/s"
-              />
-              <Metric
-                label="首 token"
-                value={formatNumber(estimate.performance.timeToFirstTokenMs)}
-                unit="ms"
-              />
-              <Metric
-                label="每用户"
-                value={formatNumber(
-                  estimate.performance.perUserTokensPerSecond,
-                )}
-                unit="tok/s"
-              />
-            </div>
-          </aside>
+              <div className="result-bar">
+                <i
+                  className="weights"
+                  style={{ width: size(parts.weights, visualMax) }}
+                />
+                <i
+                  className="kv"
+                  style={{ width: size(parts.kv, visualMax) }}
+                />
+                <i
+                  className="workspace"
+                  style={{ width: size(parts.workspace, visualMax) }}
+                />
+                <i
+                  className="runtime"
+                  style={{ width: size(runtime, visualMax) }}
+                />
+              </div>
+              <div className="result-parts">
+                <ResultPart label="权重" value={parts.weights} />
+                <ResultPart label="KV" value={parts.kv} />
+                <ResultPart label="工作区" value={parts.workspace} />
+                <ResultPart label="运行时 / 预留" value={runtime} />
+              </div>
+              <div className="result-metrics">
+                <Metric
+                  label="总吞吐"
+                  value={formatNumber(estimate.performance.totalTokensPerSecond)}
+                  unit="tok/s"
+                />
+                <Metric
+                  label="首 token"
+                  value={formatNumber(estimate.performance.timeToFirstTokenMs)}
+                  unit="ms"
+                />
+                <Metric
+                  label="每用户"
+                  value={formatNumber(
+                    estimate.performance.perUserTokensPerSecond,
+                  )}
+                  unit="tok/s"
+                />
+              </div>
+            </aside>
+            <DeploymentPrice
+              gpuId={config.gpuId}
+              gpuCount={config.gpuCount}
+              minimumGpuCount={estimate.minimumGpuCount}
+              fits={estimate.fits}
+              contextExceedsWindow={contextExceedsWindow}
+              cpuOffload={config.cpuOffload}
+            />
+          </div>
         </section>
 
         <InferenceExperience config={config} />
+        <CalculatorFaq />
       </main>
       <footer className="calculator-footer calculator-shell">
         <a href="/tools/">Ray / 工具</a>

@@ -8,10 +8,13 @@ describe("inference experience scripts", () => {
     expect(segments.map((segment) => segment.kind)).toEqual(["assistant"]);
   });
 
-  it("models an agent turn as thought, tool call, tool result, and answer", () => {
+  it("models an agent turn as a multi-step tool-use chain", () => {
     const segments = getInferenceSegments("agent");
 
     expect(segments.map((segment) => segment.kind)).toEqual([
+      "assistant",
+      "tool-call",
+      "tool-result",
       "assistant",
       "tool-call",
       "tool-result",

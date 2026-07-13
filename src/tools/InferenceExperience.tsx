@@ -43,11 +43,20 @@ export function InferenceExperience({ config }: Props) {
     () => estimateVram({ ...config, contextTokens: inputTokens }),
     [config, inputTokens],
   );
+  const simulationExceedsContextWindow =
+    inputTokens + config.outputTokens > modelEstimate.model.contextWindow;
   const currentSegment = segments[segmentIndex];
 
   useEffect(() => {
-    setInputTokens((current) => Math.min(current, maxInputTokens));
-  }, [maxInputTokens]);
+    setInputTokens(Math.min(config.contextTokens, maxInputTokens));
+    setTokensPerSecond(
+      playbackSpeed(modelEstimate.performance.perUserTokensPerSecond),
+    );
+  }, [
+    config.contextTokens,
+    maxInputTokens,
+    modelEstimate.performance.perUserTokensPerSecond,
+  ]);
 
   useEffect(() => {
     setPhase("idle");
@@ -195,7 +204,11 @@ export function InferenceExperience({ config }: Props) {
     >
       <div className="experience-heading">
         <h2 id="experience-title">推理体验</h2>
-        <span aria-live="polite">{statusText(phase, inputTokens)}</span>
+        <span aria-live="polite">
+          {simulationExceedsContextWindow
+            ? "超过模型窗口"
+            : statusText(phase, inputTokens)}
+        </span>
       </div>
 
       <div className="experience-controls">
@@ -251,6 +264,7 @@ export function InferenceExperience({ config }: Props) {
         <button
           className="experience-run"
           type="button"
+          disabled={simulationExceedsContextWindow}
           onClick={
             phase === "typing" ||
             phase === "prefill" ||

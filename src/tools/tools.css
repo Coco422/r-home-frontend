@@ -273,6 +273,12 @@
   gap: 16px;
   align-items: start;
 }
+.result-stack {
+  position: sticky;
+  top: 14px;
+  display: grid;
+  gap: 12px;
+}
 .config-card {
   overflow: hidden;
   border: 1px solid var(--tool-line);
@@ -399,8 +405,6 @@
 }
 
 .result-card {
-  position: sticky;
-  top: 14px;
   padding: 18px;
   border: 1px solid #263052;
   border-radius: 15px;
@@ -547,6 +551,100 @@
   font-size: 8px;
 }
 
+.deployment-price {
+  padding: 15px 16px;
+  border: 1px solid #dde2ed;
+  border-radius: 14px;
+  background: white;
+  box-shadow: 0 10px 26px rgba(34, 42, 67, 0.04);
+}
+.deployment-price-heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 10px;
+}
+.deployment-price-heading h2 {
+  margin: 0;
+  color: #253049;
+  font-size: 13px;
+  letter-spacing: -0.02em;
+}
+.deployment-price-heading p {
+  margin: 4px 0 0;
+  color: #778298;
+  font-size: 9px;
+}
+.deployment-price-heading a {
+  color: var(--tool-purple);
+  font-size: 10px;
+  font-weight: 750;
+}
+.deployment-price-main {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  margin: 15px 0 11px;
+}
+.deployment-price-main strong {
+  color: #1d2740;
+  font-size: 25px;
+  letter-spacing: -0.055em;
+}
+.deployment-price-main span {
+  color: #778298;
+  font-size: 10px;
+  font-weight: 650;
+}
+.deployment-price-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  border: 1px solid #e3e7ef;
+  border-radius: 9px;
+}
+.deployment-price-metrics div {
+  padding: 8px 9px;
+  border-left: 1px solid #e3e7ef;
+}
+.deployment-price-metrics div:first-child {
+  border-left: 0;
+}
+.deployment-price-metrics span,
+.deployment-price-metrics b {
+  display: block;
+}
+.deployment-price-metrics span {
+  color: #7b869c;
+  font-size: 9px;
+}
+.deployment-price-metrics b {
+  margin-top: 4px;
+  color: #273149;
+  font-size: 13px;
+  letter-spacing: -0.03em;
+}
+.deployment-price-minimum,
+.deployment-price-warning,
+.deployment-price-note,
+.deployment-price-unavailable {
+  margin: 10px 0 0;
+  color: #657189;
+  font-size: 9px;
+  line-height: 1.55;
+}
+.deployment-price-minimum {
+  color: #5345bd;
+  font-weight: 700;
+}
+.deployment-price-warning {
+  color: #b34d58;
+  font-weight: 700;
+}
+.deployment-price-unavailable {
+  padding: 14px 0 2px;
+}
+
 .experience-card {
   margin: 16px 0 42px;
   padding: 18px;
@@ -638,6 +736,10 @@
 .experience-run:hover {
   filter: brightness(1.04);
 }
+.experience-run:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
 .experience-terminal {
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -727,6 +829,7 @@
   color: #bfddff;
   font-family: "SFMono-Regular", Consolas, monospace;
   font-size: 10px;
+  white-space: pre-wrap;
 }
 .experience-tool-result {
   border: 1px solid rgba(191, 239, 117, 0.25);
@@ -752,6 +855,76 @@
   50% {
     opacity: 0;
   }
+}
+
+.calculator-faq {
+  margin: 0 0 32px;
+}
+.faq-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+.faq-heading h2 {
+  margin: 0;
+  color: #283249;
+  font-size: 15px;
+  letter-spacing: -0.03em;
+}
+.faq-heading a {
+  color: var(--tool-purple);
+  font-size: 10px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.faq-card {
+  border: 1px solid #dfe4ee;
+  border-radius: 11px;
+  background: white;
+}
+.faq-card summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 56px;
+  padding: 12px;
+  color: #344057;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 750;
+  list-style: none;
+}
+.faq-card summary::-webkit-details-marker {
+  display: none;
+}
+.faq-card summary i {
+  color: var(--tool-purple);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  transition: transform 0.18s ease;
+}
+.faq-card[open] {
+  border-color: #cfc7ff;
+  box-shadow: 0 8px 22px rgba(67, 57, 148, 0.07);
+}
+.faq-card[open] summary i {
+  transform: rotate(45deg);
+}
+.faq-card p {
+  margin: 0;
+  padding: 0 12px 13px;
+  color: #6b768a;
+  font-size: 10px;
+  line-height: 1.65;
 }
 
 .calculator-footer {
@@ -792,12 +965,15 @@
   .calculator-grid {
     grid-template-columns: 1fr;
   }
-  .result-card {
+  .result-stack {
     position: relative;
     top: auto;
   }
   .experience-card {
     margin-bottom: 28px;
+  }
+  .faq-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 @media (max-width: 620px) {
@@ -873,6 +1049,12 @@
   }
   .experience-messages {
     min-height: 250px;
+  }
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
+  .faq-heading {
+    align-items: start;
   }
   .calculator-footer {
     padding-bottom: 20px;

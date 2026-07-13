@@ -20,7 +20,8 @@
 
 核心逻辑位于：
 
-- [src/lib/vram.ts](src/lib/vram.ts)：模型/GPU 轮廓、权重、KV Cache、workspace、余量与性能估算
+- [src/lib/vram.ts](src/lib/vram.ts)：主流模型/GPU 轮廓、权重、KV Cache、workspace、余量与性能估算
+- [src/lib/deployment-pricing.ts](src/lib/deployment-pricing.ts)：公开云端按需价格快照与小时、日、月部署成本估算
 - [src/lib/share.ts](src/lib/share.ts)：URL-safe 配置编解码
 - [src/tools/VramCalculator.tsx](src/tools/VramCalculator.tsx)：交互、预设、结果卡与设备选择
 - [src/tools/InferenceExperience.tsx](src/tools/InferenceExperience.tsx)：问答 / Agent 打字机式推理体验
@@ -32,6 +33,10 @@
 ```
 
 这是一项部署前容量估算，不是兼容性或实测性能保证；请在目标模型、推理引擎、驱动和硬件上压测验证。
+
+模型目录当前提供 48 个常用 dense / 标准 MoE 档位；参数和上下文以官方模型卡与 `config.json` 核验。混合注意力、循环状态或特殊预测层模型会在公式可表达后再加入，避免给出失真的 KV Cache 结果。
+
+部署价格是静态参考数据：当前使用 [Runpod Pods · Secure Cloud 公开价目表](https://www.runpod.io/pricing) 于 **2026-07-14** 抓取的匹配 GPU 单卡小时价。多卡按单卡价线性估算；实例规格、存储、税费与运维最终以服务商结算页为准。
 
 ## 本地开发
 
