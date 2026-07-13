@@ -3,6 +3,7 @@ import {
   estimateVram,
   exceedsContextWindow,
   getModel,
+  GPUS,
   PRECISIONS,
 } from "./vram";
 
@@ -80,5 +81,37 @@ describe("estimateVram", () => {
     expect(exceedsContextWindow({ ...windowEdge, outputTokens: 4097 })).toBe(
       true,
     );
+  });
+
+  it("includes mainstream local, workstation, data-center, Apple and accelerator devices", () => {
+    expect(GPUS["rtx-3090-24"].memoryGiB).toBe(24);
+    expect(GPUS["rtx-6000-ada-48"].memoryGiB).toBe(48);
+    expect(GPUS["mi300x-192"].memoryGiB).toBe(192);
+    expect(GPUS["dgx-spark-128"].memoryGiB).toBe(128);
+    expect(GPUS["mac-studio-m2-ultra-192"].memoryGiB).toBe(192);
+    expect(GPUS["mac-studio-m2-ultra-192"].memoryType).toBe("统一内存");
+    expect(GPUS["ryzen-ai-max-395-128"].memoryGiB).toBe(96);
+    expect(GPUS["arc-a770-16"].memoryGiB).toBe(16);
+  });
+
+  it("normalises unified-memory devices to one machine", () => {
+    const estimate = estimateVram({
+      ...baseline,
+      gpuId: "dgx-spark-128",
+      gpuCount: 4,
+    });
+
+    expect(estimate.config.gpuCount).toBe(1);
+  });
+
+  it("does not suggest impossible multi-machine scaling for unified memory", () => {
+    const estimate = estimateVram({
+      ...baseline,
+      modelId: "deepseek-v3",
+      weightPrecision: "int4",
+      gpuId: "dgx-spark-128",
+    });
+
+    expect(estimate.minimumGpuCount).toBeNull();
   });
 });

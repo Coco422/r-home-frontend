@@ -4,10 +4,10 @@
 
 ## 当前站点结构
 
-| 路径 | 用途 | 入口文件 |
-| --- | --- | --- |
-| `/` | 个人主页 | `src/App.tsx` → `HomePage` |
-| `/tools/` | 工具目录 | `src/tools/ToolsIndex.tsx` |
+| 路径                     | 用途               | 入口文件                       |
+| ------------------------ | ------------------ | ------------------------------ |
+| `/`                      | 个人主页           | `src/App.tsx` → `HomePage`     |
+| `/tools/`                | 工具目录           | `src/tools/ToolsIndex.tsx`     |
 | `/tools/vram-calculator` | LLM 推理显存计算器 | `src/tools/VramCalculator.tsx` |
 
 `src/App.tsx` 根据浏览器路径渲染这三个静态 SPA 页面。`public/_redirects` 显式把两个 `/tools` 路径回退到 `index.html`，因此在 Cloudflare Pages 上直接打开或分享工具 URL 都能正常加载。
@@ -20,9 +20,10 @@
 
 核心逻辑位于：
 
-- [src/lib/vram.ts](src/lib/vram.ts)：模型/GPU 轮廓、权重、KV Cache、workspace、余量、吞吐和模拟曲线
+- [src/lib/vram.ts](src/lib/vram.ts)：模型/GPU 轮廓、权重、KV Cache、workspace、余量与性能估算
 - [src/lib/share.ts](src/lib/share.ts)：URL-safe 配置编解码
-- [src/tools/VramCalculator.tsx](src/tools/VramCalculator.tsx)：交互、推理模拟、FAQ 与结果卡
+- [src/tools/VramCalculator.tsx](src/tools/VramCalculator.tsx)：交互、预设、结果卡与设备选择
+- [src/tools/InferenceExperience.tsx](src/tools/InferenceExperience.tsx)：问答 / Agent 打字机式推理体验
 
 公式将权重和 KV 精度分开。普通 decoder-only 架构的 KV Cache 近似为：
 
@@ -80,10 +81,10 @@ push 到 main
 
 在 GitHub 仓库的 **Settings → Secrets and variables → Actions** 中应存在：
 
-| Secret | 用途 |
-| --- | --- |
-| `CLOUDFLARE_API_TOKEN` | Cloudflare API Token；至少要能编辑该账户的 Pages 项目 |
-| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare 账户 ID |
+| Secret                  | 用途                                                  |
+| ----------------------- | ----------------------------------------------------- |
+| `CLOUDFLARE_API_TOKEN`  | Cloudflare API Token；至少要能编辑该账户的 Pages 项目 |
+| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare 账户 ID                                    |
 
 然后到 GitHub 的 **Actions** 页面检查最新的 `Deploy to Cloudflare Pages` 是否成功。这个仓库不保存 Cloudflare token、账户 ID、Pages 自定义域名或部署历史，因此仅从代码无法确认这些密钥今天是否仍有效；若 workflow 报认证或项目不存在错误，需要在上述两个 Secret 和 Cloudflare Pages 项目设置中修复。
 
