@@ -37,7 +37,6 @@ const appleSiliconDevice = (
     memoryGiB,
     bandwidthGBs,
     tflops,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   }) as const;
@@ -54,7 +53,6 @@ const amdApuDevice = (
     memoryGiB,
     bandwidthGBs,
     tflops,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   }) as const;
@@ -66,7 +64,6 @@ export const GPUS = {
     memoryGiB: 6,
     bandwidthGBs: 336,
     tflops: 6.5,
-    pricePerHour: 0,
   },
   "rtx-2080ti-11": {
     label: "GeForce RTX 2080 Ti",
@@ -74,7 +71,6 @@ export const GPUS = {
     memoryGiB: 11,
     bandwidthGBs: 616,
     tflops: 13.4,
-    pricePerHour: 0,
   },
   "rtx-3060-12": {
     label: "GeForce RTX 3060",
@@ -82,7 +78,6 @@ export const GPUS = {
     memoryGiB: 12,
     bandwidthGBs: 360,
     tflops: 25,
-    pricePerHour: 0.16,
   },
   "rtx-3060ti-8": {
     label: "GeForce RTX 3060 Ti",
@@ -90,7 +85,6 @@ export const GPUS = {
     memoryGiB: 8,
     bandwidthGBs: 448,
     tflops: 16,
-    pricePerHour: 0,
   },
   "rtx-3070-8": {
     label: "GeForce RTX 3070",
@@ -98,7 +92,6 @@ export const GPUS = {
     memoryGiB: 8,
     bandwidthGBs: 448,
     tflops: 20,
-    pricePerHour: 0,
   },
   "rtx-3070ti-8": {
     label: "GeForce RTX 3070 Ti",
@@ -106,7 +99,6 @@ export const GPUS = {
     memoryGiB: 8,
     bandwidthGBs: 608,
     tflops: 22,
-    pricePerHour: 0,
   },
   "rtx-3080-10": {
     label: "GeForce RTX 3080",
@@ -114,7 +106,6 @@ export const GPUS = {
     memoryGiB: 10,
     bandwidthGBs: 760,
     tflops: 29.8,
-    pricePerHour: 0,
   },
   "rtx-3080-12": {
     label: "GeForce RTX 3080 12GB",
@@ -122,7 +113,6 @@ export const GPUS = {
     memoryGiB: 12,
     bandwidthGBs: 912,
     tflops: 29.8,
-    pricePerHour: 0,
   },
   "rtx-3080ti-12": {
     label: "GeForce RTX 3080 Ti",
@@ -130,7 +120,6 @@ export const GPUS = {
     memoryGiB: 12,
     bandwidthGBs: 912,
     tflops: 34,
-    pricePerHour: 0,
   },
   "rtx-3090-24": {
     label: "GeForce RTX 3090",
@@ -138,7 +127,6 @@ export const GPUS = {
     memoryGiB: 24,
     bandwidthGBs: 936,
     tflops: 35.6,
-    pricePerHour: 0.46,
   },
   "rtx-3090ti-24": {
     label: "GeForce RTX 3090 Ti",
@@ -146,7 +134,6 @@ export const GPUS = {
     memoryGiB: 24,
     bandwidthGBs: 1008,
     tflops: 40,
-    pricePerHour: 0,
   },
   "rtx-4060ti-8": {
     label: "GeForce RTX 4060 Ti",
@@ -154,7 +141,6 @@ export const GPUS = {
     memoryGiB: 8,
     bandwidthGBs: 288,
     tflops: 35,
-    pricePerHour: 0,
   },
   "rtx-4060-8": {
     label: "GeForce RTX 4060",
@@ -162,7 +148,6 @@ export const GPUS = {
     memoryGiB: 8,
     bandwidthGBs: 272,
     tflops: 15,
-    pricePerHour: 0,
   },
   "rtx-4060ti-16": {
     label: "GeForce RTX 4060 Ti 16GB",
@@ -170,7 +155,6 @@ export const GPUS = {
     memoryGiB: 16,
     bandwidthGBs: 288,
     tflops: 35,
-    pricePerHour: 0.24,
   },
   "rtx-4070-12": {
     label: "GeForce RTX 4070",
@@ -178,7 +162,6 @@ export const GPUS = {
     memoryGiB: 12,
     bandwidthGBs: 504,
     tflops: 29,
-    pricePerHour: 0,
   },
   "rtx-4070ti-12": {
     label: "GeForce RTX 4070 Ti",
@@ -186,7 +169,6 @@ export const GPUS = {
     memoryGiB: 12,
     bandwidthGBs: 504,
     tflops: 40,
-    pricePerHour: 0,
   },
   "rtx-4070super-12": {
     label: "GeForce RTX 4070 SUPER",
@@ -194,7 +176,6 @@ export const GPUS = {
     memoryGiB: 12,
     bandwidthGBs: 504,
     tflops: 35,
-    pricePerHour: 0,
   },
   "rtx-4070ti-super-16": {
     label: "GeForce RTX 4070 Ti SUPER",
@@ -202,7 +183,6 @@ export const GPUS = {
     memoryGiB: 16,
     bandwidthGBs: 672,
     tflops: 44,
-    pricePerHour: 0,
   },
   "rtx-4080-16": {
     label: "GeForce RTX 4080",
@@ -210,7 +190,6 @@ export const GPUS = {
     memoryGiB: 16,
     bandwidthGBs: 716,
     tflops: 49,
-    pricePerHour: 0,
   },
   "rtx-4080super-16": {
     label: "GeForce RTX 4080 SUPER",
@@ -218,7 +197,6 @@ export const GPUS = {
     memoryGiB: 16,
     bandwidthGBs: 736,
     tflops: 52,
-    pricePerHour: 0,
   },
   "rtx-4090": {
     label: "GeForce RTX 4090",
@@ -226,7 +204,6 @@ export const GPUS = {
     memoryGiB: 24,
     bandwidthGBs: 1008,
     tflops: 83,
-    pricePerHour: 0.69,
   },
   "rtx-5060-8": {
     label: "GeForce RTX 5060",
@@ -234,7 +211,6 @@ export const GPUS = {
     memoryGiB: 8,
     bandwidthGBs: 448,
     tflops: 20,
-    pricePerHour: 0,
   },
   "rtx-5060ti-8": {
     label: "GeForce RTX 5060 Ti",
@@ -242,7 +218,6 @@ export const GPUS = {
     memoryGiB: 8,
     bandwidthGBs: 448,
     tflops: 50,
-    pricePerHour: 0,
   },
   "rtx-5060ti-16": {
     label: "GeForce RTX 5060 Ti 16GB",
@@ -250,7 +225,6 @@ export const GPUS = {
     memoryGiB: 16,
     bandwidthGBs: 448,
     tflops: 50,
-    pricePerHour: 0,
   },
   "rtx-5070-12": {
     label: "GeForce RTX 5070",
@@ -258,7 +232,6 @@ export const GPUS = {
     memoryGiB: 12,
     bandwidthGBs: 672,
     tflops: 62,
-    pricePerHour: 0,
   },
   "rtx-5070ti-16": {
     label: "GeForce RTX 5070 Ti",
@@ -266,7 +239,6 @@ export const GPUS = {
     memoryGiB: 16,
     bandwidthGBs: 896,
     tflops: 88,
-    pricePerHour: 0,
   },
   "rtx-5080-16": {
     label: "GeForce RTX 5080",
@@ -274,7 +246,6 @@ export const GPUS = {
     memoryGiB: 16,
     bandwidthGBs: 960,
     tflops: 112,
-    pricePerHour: 0,
   },
   "rtx-5090": {
     label: "GeForce RTX 5090",
@@ -282,7 +253,6 @@ export const GPUS = {
     memoryGiB: 32,
     bandwidthGBs: 1792,
     tflops: 105,
-    pricePerHour: 0.99,
   },
 
   "rtx-a2000-12": {
@@ -291,7 +261,6 @@ export const GPUS = {
     memoryGiB: 12,
     bandwidthGBs: 288,
     tflops: 8,
-    pricePerHour: 0,
   },
   "rtx-a4000-16": {
     label: "RTX A4000",
@@ -299,7 +268,6 @@ export const GPUS = {
     memoryGiB: 16,
     bandwidthGBs: 448,
     tflops: 19,
-    pricePerHour: 0,
   },
   "rtx-a5000-24": {
     label: "RTX A5000",
@@ -307,7 +275,6 @@ export const GPUS = {
     memoryGiB: 24,
     bandwidthGBs: 768,
     tflops: 28,
-    pricePerHour: 0.27,
   },
   "rtx-a6000-48": {
     label: "RTX A6000",
@@ -315,7 +282,6 @@ export const GPUS = {
     memoryGiB: 48,
     bandwidthGBs: 768,
     tflops: 39,
-    pricePerHour: 0.49,
   },
   "rtx-6000-ada-48": {
     label: "RTX 6000 Ada",
@@ -323,7 +289,6 @@ export const GPUS = {
     memoryGiB: 48,
     bandwidthGBs: 960,
     tflops: 91,
-    pricePerHour: 0.77,
   },
   "rtx-2000-ada-16": {
     label: "RTX 2000 Ada Generation",
@@ -331,7 +296,6 @@ export const GPUS = {
     memoryGiB: 16,
     bandwidthGBs: 288,
     tflops: 8,
-    pricePerHour: 0,
   },
   "rtx-4000-ada-20": {
     label: "RTX 4000 Ada",
@@ -339,7 +303,6 @@ export const GPUS = {
     memoryGiB: 20,
     bandwidthGBs: 360,
     tflops: 26,
-    pricePerHour: 0,
   },
   "rtx-4500-ada-24": {
     label: "RTX 4500 Ada",
@@ -347,7 +310,6 @@ export const GPUS = {
     memoryGiB: 24,
     bandwidthGBs: 432,
     tflops: 39,
-    pricePerHour: 0,
   },
   "rtx-5000-ada-32": {
     label: "RTX 5000 Ada",
@@ -355,7 +317,6 @@ export const GPUS = {
     memoryGiB: 32,
     bandwidthGBs: 576,
     tflops: 65,
-    pricePerHour: 0,
   },
   "rtx-pro-4000-24": {
     label: "RTX PRO 4000 Blackwell",
@@ -363,7 +324,6 @@ export const GPUS = {
     memoryGiB: 24,
     bandwidthGBs: 448,
     tflops: 70,
-    pricePerHour: 0,
   },
   "rtx-pro-4500-32": {
     label: "RTX PRO 4500 Blackwell",
@@ -371,7 +331,6 @@ export const GPUS = {
     memoryGiB: 32,
     bandwidthGBs: 576,
     tflops: 95,
-    pricePerHour: 0,
   },
   "rtx-pro-5000-48": {
     label: "RTX PRO 5000 Blackwell",
@@ -379,7 +338,6 @@ export const GPUS = {
     memoryGiB: 48,
     bandwidthGBs: 896,
     tflops: 120,
-    pricePerHour: 0,
   },
   "rtx-pro-6000-96": {
     label: "RTX PRO 6000 Blackwell",
@@ -387,7 +345,6 @@ export const GPUS = {
     memoryGiB: 96,
     bandwidthGBs: 1792,
     tflops: 125,
-    pricePerHour: 1.99,
   },
 
   "t4-16": {
@@ -396,7 +353,6 @@ export const GPUS = {
     memoryGiB: 16,
     bandwidthGBs: 320,
     tflops: 8,
-    pricePerHour: 0.35,
   },
   "a2-16": {
     label: "NVIDIA A2",
@@ -404,7 +360,6 @@ export const GPUS = {
     memoryGiB: 16,
     bandwidthGBs: 200,
     tflops: 9,
-    pricePerHour: 0,
   },
   "a16-64": {
     label: "NVIDIA A16",
@@ -412,7 +367,6 @@ export const GPUS = {
     memoryGiB: 64,
     bandwidthGBs: 512,
     tflops: 18,
-    pricePerHour: 0,
   },
   "a30-24": {
     label: "NVIDIA A30",
@@ -420,7 +374,6 @@ export const GPUS = {
     memoryGiB: 24,
     bandwidthGBs: 933,
     tflops: 165,
-    pricePerHour: 0,
   },
   "a40-48": {
     label: "NVIDIA A40",
@@ -428,7 +381,6 @@ export const GPUS = {
     memoryGiB: 48,
     bandwidthGBs: 696,
     tflops: 37,
-    pricePerHour: 0.44,
   },
   "l4-24": {
     label: "NVIDIA L4",
@@ -436,7 +388,6 @@ export const GPUS = {
     memoryGiB: 24,
     bandwidthGBs: 300,
     tflops: 30,
-    pricePerHour: 0.39,
   },
   "a10-24": {
     label: "NVIDIA A10G",
@@ -444,7 +395,6 @@ export const GPUS = {
     memoryGiB: 24,
     bandwidthGBs: 600,
     tflops: 31,
-    pricePerHour: 0.7,
   },
   "l40s-48": {
     label: "NVIDIA L40S",
@@ -452,7 +402,6 @@ export const GPUS = {
     memoryGiB: 48,
     bandwidthGBs: 864,
     tflops: 91,
-    pricePerHour: 0.99,
   },
   "l40-48": {
     label: "NVIDIA L40",
@@ -460,7 +409,6 @@ export const GPUS = {
     memoryGiB: 48,
     bandwidthGBs: 864,
     tflops: 91,
-    pricePerHour: 0.82,
   },
   "a100-40": {
     label: "NVIDIA A100 40GB",
@@ -468,7 +416,6 @@ export const GPUS = {
     memoryGiB: 40,
     bandwidthGBs: 1555,
     tflops: 312,
-    pricePerHour: 1.7,
   },
   "a800-40": {
     label: "NVIDIA A800 40GB",
@@ -476,7 +423,6 @@ export const GPUS = {
     memoryGiB: 40,
     bandwidthGBs: 1555,
     tflops: 312,
-    pricePerHour: 0,
   },
   "a100-80": {
     label: "NVIDIA A100 80GB",
@@ -484,7 +430,6 @@ export const GPUS = {
     memoryGiB: 80,
     bandwidthGBs: 2039,
     tflops: 312,
-    pricePerHour: 1.49,
   },
   "a800-80": {
     label: "NVIDIA A800 80GB",
@@ -492,7 +437,6 @@ export const GPUS = {
     memoryGiB: 80,
     bandwidthGBs: 1935,
     tflops: 312,
-    pricePerHour: 0,
   },
   "h100-80": {
     label: "NVIDIA H100 80GB",
@@ -500,7 +444,6 @@ export const GPUS = {
     memoryGiB: 80,
     bandwidthGBs: 3350,
     tflops: 989,
-    pricePerHour: 2.99,
   },
   "h100-pcie-80": {
     label: "NVIDIA H100 PCIe",
@@ -508,7 +451,6 @@ export const GPUS = {
     memoryGiB: 80,
     bandwidthGBs: 2000,
     tflops: 756,
-    pricePerHour: 2.89,
   },
   "h800-80": {
     label: "NVIDIA H800 80GB",
@@ -516,7 +458,6 @@ export const GPUS = {
     memoryGiB: 80,
     bandwidthGBs: 3000,
     tflops: 989,
-    pricePerHour: 0,
   },
   "h100-nvl-94": {
     label: "NVIDIA H100 NVL",
@@ -524,7 +465,6 @@ export const GPUS = {
     memoryGiB: 94,
     bandwidthGBs: 3900,
     tflops: 835,
-    pricePerHour: 3.19,
   },
   "h200-141": {
     label: "NVIDIA H200 141GB",
@@ -532,7 +472,6 @@ export const GPUS = {
     memoryGiB: 141,
     bandwidthGBs: 4800,
     tflops: 989,
-    pricePerHour: 4.39,
   },
   "b100-192": {
     label: "NVIDIA B100",
@@ -540,7 +479,6 @@ export const GPUS = {
     memoryGiB: 192,
     bandwidthGBs: 8000,
     tflops: 2000,
-    pricePerHour: 0,
   },
   "b200-192": {
     label: "NVIDIA B200",
@@ -548,7 +486,6 @@ export const GPUS = {
     memoryGiB: 192,
     bandwidthGBs: 8000,
     tflops: 2250,
-    pricePerHour: 5.89,
   },
   "b300-288": {
     label: "NVIDIA B300",
@@ -556,7 +493,6 @@ export const GPUS = {
     memoryGiB: 288,
     bandwidthGBs: 8000,
     tflops: 2500,
-    pricePerHour: 7.39,
   },
   "r100-288": {
     label: "NVIDIA R100",
@@ -564,7 +500,6 @@ export const GPUS = {
     memoryGiB: 288,
     bandwidthGBs: 8000,
     tflops: 2500,
-    pricePerHour: 0,
   },
 
   "dgx-spark-128": {
@@ -573,7 +508,6 @@ export const GPUS = {
     memoryGiB: 128,
     bandwidthGBs: 273,
     tflops: 1000,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -583,7 +517,6 @@ export const GPUS = {
     memoryGiB: 96,
     bandwidthGBs: 3000,
     tflops: 989,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -593,7 +526,6 @@ export const GPUS = {
     memoryGiB: 192,
     bandwidthGBs: 8000,
     tflops: 2500,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -604,7 +536,6 @@ export const GPUS = {
     memoryGiB: 32,
     bandwidthGBs: 273,
     tflops: 15,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -668,7 +599,6 @@ export const GPUS = {
     memoryGiB: 16,
     bandwidthGBs: 68,
     tflops: 3,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -678,7 +608,6 @@ export const GPUS = {
     memoryGiB: 32,
     bandwidthGBs: 200,
     tflops: 5,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -688,7 +617,6 @@ export const GPUS = {
     memoryGiB: 64,
     bandwidthGBs: 400,
     tflops: 10,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -698,7 +626,6 @@ export const GPUS = {
     memoryGiB: 24,
     bandwidthGBs: 100,
     tflops: 4,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -708,7 +635,6 @@ export const GPUS = {
     memoryGiB: 32,
     bandwidthGBs: 200,
     tflops: 7,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -718,7 +644,6 @@ export const GPUS = {
     memoryGiB: 96,
     bandwidthGBs: 400,
     tflops: 14,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -728,7 +653,6 @@ export const GPUS = {
     memoryGiB: 24,
     bandwidthGBs: 100,
     tflops: 4,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -738,7 +662,6 @@ export const GPUS = {
     memoryGiB: 36,
     bandwidthGBs: 150,
     tflops: 7,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -748,7 +671,6 @@ export const GPUS = {
     memoryGiB: 128,
     bandwidthGBs: 400,
     tflops: 16,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -758,7 +680,6 @@ export const GPUS = {
     memoryGiB: 128,
     bandwidthGBs: 546,
     tflops: 20,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -768,7 +689,6 @@ export const GPUS = {
     memoryGiB: 64,
     bandwidthGBs: 800,
     tflops: 22,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -778,7 +698,6 @@ export const GPUS = {
     memoryGiB: 128,
     bandwidthGBs: 800,
     tflops: 22,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -788,7 +707,6 @@ export const GPUS = {
     memoryGiB: 64,
     bandwidthGBs: 400,
     tflops: 14,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -798,7 +716,6 @@ export const GPUS = {
     memoryGiB: 96,
     bandwidthGBs: 400,
     tflops: 14,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -808,7 +725,6 @@ export const GPUS = {
     memoryGiB: 128,
     bandwidthGBs: 800,
     tflops: 27,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -818,7 +734,6 @@ export const GPUS = {
     memoryGiB: 192,
     bandwidthGBs: 800,
     tflops: 27,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -828,7 +743,6 @@ export const GPUS = {
     memoryGiB: 96,
     bandwidthGBs: 819,
     tflops: 55,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -838,7 +752,6 @@ export const GPUS = {
     memoryGiB: 256,
     bandwidthGBs: 819,
     tflops: 55,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -848,7 +761,6 @@ export const GPUS = {
     memoryGiB: 512,
     bandwidthGBs: 819,
     tflops: 55,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -858,7 +770,6 @@ export const GPUS = {
     memoryGiB: 64,
     bandwidthGBs: 546,
     tflops: 20,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -868,7 +779,6 @@ export const GPUS = {
     memoryGiB: 128,
     bandwidthGBs: 546,
     tflops: 20,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -879,7 +789,6 @@ export const GPUS = {
     memoryGiB: 8,
     bandwidthGBs: 224,
     tflops: 9,
-    pricePerHour: 0,
   },
   "rx-6600xt-8": {
     label: "Radeon RX 6600 XT",
@@ -887,7 +796,6 @@ export const GPUS = {
     memoryGiB: 8,
     bandwidthGBs: 256,
     tflops: 10,
-    pricePerHour: 0,
   },
   "rx-6650xt-8": {
     label: "Radeon RX 6650 XT",
@@ -895,7 +803,6 @@ export const GPUS = {
     memoryGiB: 8,
     bandwidthGBs: 280,
     tflops: 11,
-    pricePerHour: 0,
   },
   "rx-6700-10": {
     label: "Radeon RX 6700",
@@ -903,7 +810,6 @@ export const GPUS = {
     memoryGiB: 10,
     bandwidthGBs: 320,
     tflops: 11,
-    pricePerHour: 0,
   },
   "rx-6700xt-12": {
     label: "Radeon RX 6700 XT",
@@ -911,7 +817,6 @@ export const GPUS = {
     memoryGiB: 12,
     bandwidthGBs: 384,
     tflops: 13,
-    pricePerHour: 0,
   },
   "rx-6750xt-12": {
     label: "Radeon RX 6750 XT",
@@ -919,7 +824,6 @@ export const GPUS = {
     memoryGiB: 12,
     bandwidthGBs: 432,
     tflops: 13.7,
-    pricePerHour: 0,
   },
   "rx-6800-16": {
     label: "Radeon RX 6800",
@@ -927,7 +831,6 @@ export const GPUS = {
     memoryGiB: 16,
     bandwidthGBs: 512,
     tflops: 16,
-    pricePerHour: 0,
   },
   "rx-6800xt-16": {
     label: "Radeon RX 6800 XT",
@@ -935,7 +838,6 @@ export const GPUS = {
     memoryGiB: 16,
     bandwidthGBs: 512,
     tflops: 21,
-    pricePerHour: 0,
   },
   "rx-6900xt-16": {
     label: "Radeon RX 6900 XT",
@@ -943,7 +845,6 @@ export const GPUS = {
     memoryGiB: 16,
     bandwidthGBs: 512,
     tflops: 23,
-    pricePerHour: 0,
   },
   "rx-6950xt-16": {
     label: "Radeon RX 6950 XT",
@@ -951,7 +852,6 @@ export const GPUS = {
     memoryGiB: 16,
     bandwidthGBs: 576,
     tflops: 23,
-    pricePerHour: 0,
   },
   "rx-7600xt-16": {
     label: "Radeon RX 7600 XT",
@@ -959,7 +859,6 @@ export const GPUS = {
     memoryGiB: 16,
     bandwidthGBs: 288,
     tflops: 22,
-    pricePerHour: 0,
   },
   "rx-7600-8": {
     label: "Radeon RX 7600",
@@ -967,7 +866,6 @@ export const GPUS = {
     memoryGiB: 8,
     bandwidthGBs: 288,
     tflops: 22,
-    pricePerHour: 0,
   },
   "rx-7700xt-12": {
     label: "Radeon RX 7700 XT",
@@ -975,7 +873,6 @@ export const GPUS = {
     memoryGiB: 12,
     bandwidthGBs: 432,
     tflops: 35,
-    pricePerHour: 0,
   },
   "rx-7900xtx-24": {
     label: "Radeon RX 7900 XTX",
@@ -983,7 +880,6 @@ export const GPUS = {
     memoryGiB: 24,
     bandwidthGBs: 960,
     tflops: 61,
-    pricePerHour: 0,
   },
   "rx-7900xt-20": {
     label: "Radeon RX 7900 XT",
@@ -991,7 +887,6 @@ export const GPUS = {
     memoryGiB: 20,
     bandwidthGBs: 800,
     tflops: 52,
-    pricePerHour: 0,
   },
   "rx-7800xt-16": {
     label: "Radeon RX 7800 XT",
@@ -999,7 +894,6 @@ export const GPUS = {
     memoryGiB: 16,
     bandwidthGBs: 624,
     tflops: 38,
-    pricePerHour: 0,
   },
   "rx-7900gre-16": {
     label: "Radeon RX 7900 GRE",
@@ -1007,7 +901,6 @@ export const GPUS = {
     memoryGiB: 16,
     bandwidthGBs: 576,
     tflops: 46,
-    pricePerHour: 0,
   },
   "rx-9070xt-16": {
     label: "Radeon RX 9070 XT",
@@ -1015,7 +908,6 @@ export const GPUS = {
     memoryGiB: 16,
     bandwidthGBs: 640,
     tflops: 60,
-    pricePerHour: 0,
   },
   "rx-9070-16": {
     label: "Radeon RX 9070",
@@ -1023,7 +915,6 @@ export const GPUS = {
     memoryGiB: 16,
     bandwidthGBs: 640,
     tflops: 37,
-    pricePerHour: 0,
   },
   "radeon-pro-w6600-8": {
     label: "Radeon PRO W6600",
@@ -1031,7 +922,6 @@ export const GPUS = {
     memoryGiB: 8,
     bandwidthGBs: 256,
     tflops: 10,
-    pricePerHour: 0,
   },
   "radeon-pro-w6800-32": {
     label: "Radeon PRO W6800",
@@ -1039,7 +929,6 @@ export const GPUS = {
     memoryGiB: 32,
     bandwidthGBs: 512,
     tflops: 17,
-    pricePerHour: 0,
   },
   "radeon-pro-w7900-48": {
     label: "Radeon PRO W7900",
@@ -1047,7 +936,6 @@ export const GPUS = {
     memoryGiB: 48,
     bandwidthGBs: 864,
     tflops: 62,
-    pricePerHour: 0,
   },
   "radeon-pro-w7800-32": {
     label: "Radeon PRO W7800",
@@ -1055,7 +943,6 @@ export const GPUS = {
     memoryGiB: 32,
     bandwidthGBs: 576,
     tflops: 45,
-    pricePerHour: 0,
   },
   "mi210-64": {
     label: "AMD Instinct MI210",
@@ -1063,7 +950,6 @@ export const GPUS = {
     memoryGiB: 64,
     bandwidthGBs: 1638,
     tflops: 181,
-    pricePerHour: 0,
   },
   "mi250x-128": {
     label: "AMD Instinct MI250X",
@@ -1071,7 +957,6 @@ export const GPUS = {
     memoryGiB: 128,
     bandwidthGBs: 3276,
     tflops: 383,
-    pricePerHour: 0,
   },
   "mi250-128": {
     label: "AMD Instinct MI250",
@@ -1079,7 +964,6 @@ export const GPUS = {
     memoryGiB: 128,
     bandwidthGBs: 3200,
     tflops: 383,
-    pricePerHour: 0,
   },
   "mi300a-128": {
     label: "AMD Instinct MI300A",
@@ -1087,7 +971,6 @@ export const GPUS = {
     memoryGiB: 128,
     bandwidthGBs: 5300,
     tflops: 1307,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -1097,7 +980,6 @@ export const GPUS = {
     memoryGiB: 192,
     bandwidthGBs: 5300,
     tflops: 1307,
-    pricePerHour: 0,
   },
   "mi325x-256": {
     label: "AMD Instinct MI325X",
@@ -1105,7 +987,6 @@ export const GPUS = {
     memoryGiB: 256,
     bandwidthGBs: 6000,
     tflops: 1307,
-    pricePerHour: 0,
   },
   "ryzen-ai-max-395-64": {
     label: "Ryzen AI Max+ 395",
@@ -1113,7 +994,6 @@ export const GPUS = {
     memoryGiB: 64,
     bandwidthGBs: 256,
     tflops: 30,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -1147,7 +1027,6 @@ export const GPUS = {
     memoryGiB: 96,
     bandwidthGBs: 256,
     tflops: 30,
-    pricePerHour: 0,
     memoryType: "统一内存",
     supportsMultiGpu: false,
   },
@@ -1158,7 +1037,6 @@ export const GPUS = {
     memoryGiB: 16,
     bandwidthGBs: 560,
     tflops: 17,
-    pricePerHour: 0,
   },
   "arc-b580-12": {
     label: "Intel Arc B580",
@@ -1166,7 +1044,6 @@ export const GPUS = {
     memoryGiB: 12,
     bandwidthGBs: 456,
     tflops: 20,
-    pricePerHour: 0,
   },
   "gaudi2-96": {
     label: "Intel Gaudi 2",
@@ -1174,7 +1051,6 @@ export const GPUS = {
     memoryGiB: 96,
     bandwidthGBs: 2450,
     tflops: 432,
-    pricePerHour: 0,
   },
   "gaudi3-128": {
     label: "Intel Gaudi 3",
@@ -1182,7 +1058,6 @@ export const GPUS = {
     memoryGiB: 128,
     bandwidthGBs: 3700,
     tflops: 1835,
-    pricePerHour: 0,
   },
 
   custom: {
@@ -1191,7 +1066,6 @@ export const GPUS = {
     memoryGiB: 24,
     bandwidthGBs: 1000,
     tflops: 80,
-    pricePerHour: 0,
   },
 } as const satisfies Record<string, GpuDefinition>;
 
@@ -1212,42 +1086,6 @@ export const MODEL_CATEGORIES = [
 export type ModelCategory = (typeof MODEL_CATEGORIES)[number];
 
 export const MODELS = {
-  "qwen2-5-0-5b": {
-    label: "Qwen2.5 0.5B",
-    category: "Qwen",
-    totalParametersB: 0.49,
-    activeParametersB: 0.49,
-    layers: 24,
-    hiddenSize: 896,
-    kvHeads: 2,
-    headDim: 64,
-    attention: "GQA",
-    contextWindow: 32_768,
-  },
-  "qwen2-5-1-5b": {
-    label: "Qwen2.5 1.5B",
-    category: "Qwen",
-    totalParametersB: 1.54,
-    activeParametersB: 1.54,
-    layers: 28,
-    hiddenSize: 1536,
-    kvHeads: 2,
-    headDim: 128,
-    attention: "GQA",
-    contextWindow: 32_768,
-  },
-  "qwen2-5-3b": {
-    label: "Qwen2.5 3B",
-    category: "Qwen",
-    totalParametersB: 3.09,
-    activeParametersB: 3.09,
-    layers: 36,
-    hiddenSize: 2048,
-    kvHeads: 2,
-    headDim: 128,
-    attention: "GQA",
-    contextWindow: 32_768,
-  },
   "qwen3-0-6b": {
     label: "Qwen3 0.6B",
     category: "Qwen",
@@ -1271,18 +1109,6 @@ export const MODELS = {
     headDim: 128,
     attention: "GQA",
     contextWindow: 40_960,
-  },
-  "qwen2-5-7b": {
-    label: "Qwen2.5 7B",
-    category: "Qwen",
-    totalParametersB: 7.61,
-    activeParametersB: 7.61,
-    layers: 28,
-    hiddenSize: 3584,
-    kvHeads: 4,
-    headDim: 128,
-    attention: "GQA",
-    contextWindow: 131_072,
   },
   "qwen3-4b": {
     label: "Qwen3 4B",
@@ -1320,29 +1146,35 @@ export const MODELS = {
     attention: "GQA",
     contextWindow: 40_960,
   },
-  "qwen2-5-14b": {
-    label: "Qwen2.5 14B",
+  "qwen3-6-27b": {
+    label: "Qwen3.6 27B",
     category: "Qwen",
-    totalParametersB: 14.77,
-    activeParametersB: 14.77,
-    layers: 48,
+    totalParametersB: 27,
+    activeParametersB: 27,
+    layers: 64,
     hiddenSize: 5120,
-    kvHeads: 8,
-    headDim: 128,
-    attention: "GQA · 128K RoPE 扩展",
-    contextWindow: 131_072,
-  },
-  "qwen3-30b-a3b": {
-    label: "Qwen3 30B-A3B",
-    category: "Qwen",
-    totalParametersB: 30.5,
-    activeParametersB: 3.3,
-    layers: 48,
-    hiddenSize: 2048,
     kvHeads: 4,
-    headDim: 128,
-    attention: "GQA · MoE (128/8)",
-    contextWindow: 40_960,
+    headDim: 256,
+    // Every fourth layer has full attention; the other layers use a
+    // recurrent DeltaNet state rather than a token-growing KV cache.
+    kvElementsPerToken: 32_768,
+    attention: "Hybrid · Gated DeltaNet + Gated Attention",
+    contextWindow: 262_144,
+  },
+  "qwen3-6-35b-a3b": {
+    label: "Qwen3.6 35B-A3B",
+    category: "Qwen",
+    totalParametersB: 35,
+    activeParametersB: 3,
+    layers: 40,
+    hiddenSize: 2048,
+    kvHeads: 2,
+    headDim: 256,
+    // Ten full-attention layers; the remaining DeltaNet layers have a
+    // constant recurrent state and are not counted in token-growing KV.
+    kvElementsPerToken: 10_240,
+    attention: "Hybrid · Gated DeltaNet + Gated Attention · MoE (256/8)",
+    contextWindow: 262_144,
   },
   "llama-3-8b": {
     label: "Llama 3.1 8B",
@@ -1367,18 +1199,6 @@ export const MODELS = {
     headDim: 128,
     attention: "GQA",
     contextWindow: 40_960,
-  },
-  "qwen2-5-32b": {
-    label: "Qwen2.5 32B",
-    category: "Qwen",
-    totalParametersB: 32.5,
-    activeParametersB: 32.5,
-    layers: 64,
-    hiddenSize: 5120,
-    kvHeads: 8,
-    headDim: 128,
-    attention: "GQA",
-    contextWindow: 131_072,
   },
   "qwen2-5-72b": {
     label: "Qwen2.5 72B",
@@ -1464,18 +1284,6 @@ export const MODELS = {
     attention: "GQA",
     contextWindow: 131_072,
   },
-  "deepseek-r1-distill-qwen-1-5b": {
-    label: "DeepSeek-R1-Distill-Qwen-1.5B",
-    category: "DeepSeek",
-    totalParametersB: 1.777,
-    activeParametersB: 1.777,
-    layers: 28,
-    hiddenSize: 1536,
-    kvHeads: 2,
-    headDim: 128,
-    attention: "GQA",
-    contextWindow: 131_072,
-  },
   "deepseek-r1-distill-qwen-7b": {
     label: "DeepSeek-R1-Distill-Qwen-7B",
     category: "DeepSeek",
@@ -1484,18 +1292,6 @@ export const MODELS = {
     layers: 28,
     hiddenSize: 3584,
     kvHeads: 4,
-    headDim: 128,
-    attention: "GQA",
-    contextWindow: 131_072,
-  },
-  "deepseek-r1-distill-qwen-14b": {
-    label: "DeepSeek-R1-Distill-Qwen-14B",
-    category: "DeepSeek",
-    totalParametersB: 14,
-    activeParametersB: 14,
-    layers: 48,
-    hiddenSize: 5120,
-    kvHeads: 8,
     headDim: 128,
     attention: "GQA",
     contextWindow: 131_072,
@@ -1512,43 +1308,33 @@ export const MODELS = {
     attention: "GQA",
     contextWindow: 131_072,
   },
-  "deepseek-r1-distill-llama-8b": {
-    label: "DeepSeek-R1-Distill-Llama-8B",
+  "deepseek-v4-flash": {
+    label: "DeepSeek-V4-Flash 284B-A13B",
     category: "DeepSeek",
-    totalParametersB: 8.03,
-    activeParametersB: 8.03,
-    layers: 32,
+    totalParametersB: 284,
+    activeParametersB: 13,
+    layers: 43,
     hiddenSize: 4096,
-    kvHeads: 8,
-    headDim: 128,
-    attention: "GQA",
-    contextWindow: 131_072,
+    kvHeads: 1,
+    headDim: 512,
+    // CSA/HCA cache compression is derived from the public reference config.
+    kvElementsPerToken: 3_440,
+    attention: "CSA / HCA · MoE (256/6 + shared) · 压缩缓存估算",
+    contextWindow: 1_048_576,
   },
-  "deepseek-r1-distill-llama-70b": {
-    label: "DeepSeek-R1-Distill-Llama-70B",
+  "deepseek-v4-pro": {
+    label: "DeepSeek-V4-Pro 1.6T-A49B",
     category: "DeepSeek",
-    totalParametersB: 70.554,
-    activeParametersB: 70.554,
-    layers: 80,
-    hiddenSize: 8192,
-    kvHeads: 8,
-    headDim: 128,
-    attention: "GQA",
-    contextWindow: 131_072,
-  },
-  "deepseek-v3": {
-    label: "DeepSeek-V3 / R1 671B-A37B",
-    category: "DeepSeek",
-    totalParametersB: 671,
-    activeParametersB: 37,
+    totalParametersB: 1_600,
+    activeParametersB: 49,
     layers: 61,
     hiddenSize: 7168,
     kvHeads: 1,
-    headDim: 1,
-    // MLA retains a compact latent cache; it is not the standard K/V shape.
-    kvElementsPerToken: 61 * 576,
-    attention: "MLA · MoE (256/8 + shared)",
-    contextWindow: 163_840,
+    headDim: 512,
+    // CSA/HCA cache compression is derived from the public reference config.
+    kvElementsPerToken: 4_924,
+    attention: "CSA / HCA · MoE (384/6 + shared) · 压缩缓存估算",
+    contextWindow: 1_048_576,
   },
   "mistral-7b-v0-3": {
     label: "Mistral 7B Instruct v0.3",
@@ -1646,29 +1432,19 @@ export const MODELS = {
     attention: "GQA",
     contextWindow: 131_072,
   },
-  "glm-4-5-air": {
-    label: "GLM-4.5-Air 106B-A12B",
+  "glm-5-2": {
+    label: "GLM-5.2 744B-A40B",
     category: "GLM / 智谱",
-    totalParametersB: 106,
-    activeParametersB: 12,
-    layers: 46,
-    hiddenSize: 4096,
-    kvHeads: 8,
-    headDim: 128,
-    attention: "GQA · MoE (128/8 + shared)",
-    contextWindow: 131_072,
-  },
-  "glm-4-5": {
-    label: "GLM-4.5 355B-A32B",
-    category: "GLM / 智谱",
-    totalParametersB: 355,
-    activeParametersB: 32,
-    layers: 92,
-    hiddenSize: 5120,
-    kvHeads: 8,
-    headDim: 128,
-    attention: "GQA · MoE (160/8 + shared)",
-    contextWindow: 131_072,
+    totalParametersB: 744,
+    activeParametersB: 40,
+    layers: 78,
+    hiddenSize: 6144,
+    kvHeads: 64,
+    headDim: 192,
+    // MLA/DSA cache estimate: 78 compact latent layers plus 21 full indexers.
+    kvElementsPerToken: 47_616,
+    attention: "MLA + DSA / IndexShare · MoE (256/8 + shared) · 优化 KV 估算",
+    contextWindow: 1_048_576,
   },
   "hunyuan-a13b": {
     label: "Hunyuan-A13B（32K 原生 / 256K 扩展）",
@@ -1797,6 +1573,25 @@ export const MODELS = {
 
 export type ModelId = keyof typeof MODELS;
 
+// Keep existing shared URLs usable after compacting the visible catalogue.
+// The target is the closest retained profile, not an exact compatibility claim.
+const LEGACY_MODEL_ALIASES: Record<string, ModelId> = {
+  "qwen2-5-0-5b": "qwen3-0-6b",
+  "qwen2-5-1-5b": "qwen3-1-7b",
+  "qwen2-5-3b": "qwen3-4b",
+  "qwen2-5-7b": "qwen3-8b",
+  "qwen2-5-14b": "qwen3-14b",
+  "qwen2-5-32b": "qwen3-32b",
+  "qwen3-30b-a3b": "qwen3-6-35b-a3b",
+  "deepseek-r1-distill-qwen-1-5b": "deepseek-r1-distill-qwen-7b",
+  "deepseek-r1-distill-qwen-14b": "deepseek-r1-32b",
+  "deepseek-r1-distill-llama-8b": "deepseek-r1-distill-qwen-7b",
+  "deepseek-r1-distill-llama-70b": "deepseek-r1-32b",
+  "deepseek-v3": "deepseek-v4-flash",
+  "glm-4-5-air": "glm-5-2",
+  "glm-4-5": "glm-5-2",
+};
+
 export const RESERVES = {
   tight: { label: "紧凑", fragmentationRate: 0.1, fixedSafetyGiB: 0.25 },
   balanced: { label: "均衡", fragmentationRate: 0.15, fixedSafetyGiB: 0.5 },
@@ -1870,7 +1665,6 @@ export type GpuDefinition = {
   memoryGiB: number;
   bandwidthGBs: number;
   tflops: number;
-  pricePerHour: number;
   memoryType?: "统一内存";
   supportsMultiGpu?: boolean;
 };
@@ -1897,6 +1691,10 @@ export function normaliseInput(
 ): CalculatorInput {
   const merged = { ...DEFAULT_CALCULATOR_INPUT, ...input };
   const gpuId = idFrom(GPUS, merged.gpuId, DEFAULT_CALCULATOR_INPUT.gpuId);
+  const modelId =
+    typeof merged.modelId === "string"
+      ? (LEGACY_MODEL_ALIASES[merged.modelId] ?? merged.modelId)
+      : merged.modelId;
   const requestedGpuCount = Math.round(inRange(merged.gpuCount, 1, 1, 32));
   const selectedGpu = GPUS[gpuId];
   const gpuCount =
@@ -1906,7 +1704,7 @@ export function normaliseInput(
 
   return {
     ...merged,
-    modelId: idFrom(MODELS, merged.modelId, DEFAULT_CALCULATOR_INPUT.modelId),
+    modelId: idFrom(MODELS, modelId, DEFAULT_CALCULATOR_INPUT.modelId),
     gpuId,
     weightPrecision: idFrom(
       PRECISIONS,
@@ -2073,11 +1871,6 @@ function performanceEstimate({
     totalTokensPerSecond,
     perUserTokensPerSecond,
     timeToFirstTokenMs,
-    costPerMillionOutputTokens:
-      gpu.pricePerHour > 0
-        ? (gpu.pricePerHour * 1_000_000) /
-          Math.max(totalTokensPerSecond * 3600, 1)
-        : null,
   };
 }
 

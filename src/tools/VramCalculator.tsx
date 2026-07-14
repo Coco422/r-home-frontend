@@ -8,7 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { CalculatorFaq } from "./CalculatorFaq";
-import { DeploymentPrice } from "./DeploymentPrice";
+import { HardwarePurchaseBudget } from "./HardwarePurchaseBudget";
 import { InferenceExperience } from "./InferenceExperience";
 import {
   SearchableSelect,
@@ -582,13 +582,16 @@ export function VramCalculator() {
                 />
               </div>
             </aside>
-            <DeploymentPrice
+            <HardwarePurchaseBudget
               gpuId={config.gpuId}
               gpuCount={config.gpuCount}
               minimumGpuCount={estimate.minimumGpuCount}
               fits={estimate.fits}
               contextExceedsWindow={contextExceedsWindow}
               cpuOffload={config.cpuOffload}
+              offloadedWeightsGiB={
+                estimate.weightsGiB * (config.offloadPercent / 100)
+              }
             />
           </div>
         </section>

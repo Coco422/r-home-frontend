@@ -1,4 +1,4 @@
-import { DEPLOYMENT_PRICE_AS_OF } from "../lib/deployment-pricing";
+import { HARDWARE_PURCHASE_AS_OF } from "../lib/hardware-purchase";
 
 const FAQ_ITEMS = [
   {
@@ -27,13 +27,18 @@ const FAQ_ITEMS = [
       "它们使用统一内存，应按可供 GPU 使用的容量估算，并为系统留余量；不应把多台机器的内存简单相加。",
   },
   {
-    question: "部署价格如何估算？",
+    question: "购置预算包括什么？",
     answer:
-      "按所选硬件的公开云租赁参考价 × 设备数量 × 运行时长计算；多卡按单卡价线性估算，地域、库存与实例规格都会改变结算价。",
+      "它是一次性硬件购置预算：GPU 外还会列入 CPU、内存、主板、SSD、机箱、电源、散热和基础网络。税费、运保、机柜、UPS、电力、运维与软件许可另计。",
   },
   {
-    question: "报价包含什么、不包含什么？",
-    answer: `价格数据截至 ${DEPLOYMENT_PRICE_AS_OF}，仅供预算；实例规格、存储、税费与运维以服务商结算页为准。`,
+    question: "为什么不能只把 GPU 单价相加？",
+    answer:
+      "多卡需要对应的 PCIe 槽位、供电、散热、CPU、ECC 内存和机箱；SXM/HGX、统一内存设备或多节点方案更应按完整整机询价，不能用普通工作站底座相加。",
+  },
+  {
+    question: "价格能直接当采购报价吗？",
+    answer: `不能。数据整理于 ${HARDWARE_PURCHASE_AS_OF}，只用于初筛；库存、地区、税率、二手成色、保修和整机配置都会改变成交价，请以供应商书面报价为准。`,
   },
 ];
 

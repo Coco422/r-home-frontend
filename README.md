@@ -21,11 +21,12 @@
 核心逻辑位于：
 
 - [src/lib/vram.ts](src/lib/vram.ts)：主流模型/GPU 轮廓、权重、KV Cache、workspace、余量与性能估算
-- [src/lib/deployment-pricing.ts](src/lib/deployment-pricing.ts)：公开云端按需价格快照与小时、日、月部署成本估算
+- [src/lib/hardware-purchase.ts](src/lib/hardware-purchase.ts)：公开硬件购置价快照、主机平台 BOM 与整机预算
 - [src/lib/share.ts](src/lib/share.ts)：URL-safe 配置编解码
 - [src/tools/VramCalculator.tsx](src/tools/VramCalculator.tsx)：交互、预设、结果卡与设备选择
 - [src/tools/SearchableSelect.tsx](src/tools/SearchableSelect.tsx)：模型与设备的分组搜索选择器
 - [src/tools/InferenceExperience.tsx](src/tools/InferenceExperience.tsx)：问答 / Agent 打字机式推理体验
+- [src/tools/HardwarePurchaseBudget.tsx](src/tools/HardwarePurchaseBudget.tsx)：GPU、服务器配件和来源展开卡
 
 公式将权重和 KV 精度分开。普通 decoder-only 架构的 KV Cache 近似为：
 
@@ -35,9 +36,11 @@
 
 这是一项部署前容量估算，不是兼容性或实测性能保证；请在目标模型、推理引擎、驱动和硬件上压测验证。
 
-模型目录当前提供 48 个常用 dense / 标准 MoE 档位；参数和上下文以官方模型卡与 `config.json` 核验。混合注意力、循环状态或特殊预测层模型会在公式可表达后再加入，避免给出失真的 KV Cache 结果。
+模型目录当前提供 39 个常用 dense / MoE 档位；相同尺寸的旧代模型会让位给较新的代表项。最新加入的 [Qwen3.6 27B](https://huggingface.co/Qwen/Qwen3.6-27B)、[Qwen3.6 35B-A3B](https://huggingface.co/Qwen/Qwen3.6-35B-A3B)、[DeepSeek-V4 Flash](https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash)、[DeepSeek-V4 Pro](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro) 和 [GLM-5.2](https://huggingface.co/zai-org/GLM-5.2) 均以官方模型卡与 `config.json` 核验。混合注意力、压缩 KV 或循环状态模型会在选项中明确标记为近似估算，避免把普通 GQA 公式套用到不兼容架构。
 
-部署价格是静态参考数据：当前使用 [Runpod Pods · Secure Cloud 公开价目表](https://www.runpod.io/pricing) 于 **2026-07-14** 抓取的匹配 GPU 单卡小时价。多卡按单卡价线性估算；实例规格、存储、税费与运维最终以服务商结算页为准。
+硬件购置预算是静态参考数据，不是云租赁费：它按可核验的 GPU 公开价加上服务器平台预留，拆开显示 CPU、内存、主板、SSD、机箱 / 电源 / 散热和基础网络。GPU 来源、市场、价格条件与链接都保存在 `hardware-purchase.ts`，并会在页面的「来源与口径」中展开。中国大陆及海外公开页面统一在 **2026-07-14** 整理；库存、地区、税率、二手成色、进口、保修与整机配置会改变成交价，必须以供应商书面报价为准。
+
+对于统一内存设备、SXM / HGX、没有准确 SKU 的整机和多节点方案，计算器会明确显示「需询价」或「暂未收录」，不会把 GPU 单价线性相加，也不会用 ¥0 伪造总成本。
 
 ## 本地开发
 

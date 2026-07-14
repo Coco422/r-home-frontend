@@ -674,98 +674,176 @@
   font-size: 8px;
 }
 
-.deployment-price {
+.hardware-purchase {
   padding: 15px 16px;
   border: 1px solid #dde2ed;
   border-radius: 14px;
   background: white;
   box-shadow: 0 10px 26px rgba(34, 42, 67, 0.04);
 }
-.deployment-price-heading {
+.hardware-purchase-heading {
   display: flex;
   align-items: start;
   justify-content: space-between;
   gap: 10px;
 }
-.deployment-price-heading h2 {
+.hardware-purchase-heading h2 {
   margin: 0;
   color: #253049;
   font-size: 13px;
   letter-spacing: -0.02em;
 }
-.deployment-price-heading p {
+.hardware-purchase-heading p {
   margin: 4px 0 0;
   color: #778298;
   font-size: 9px;
 }
-.deployment-price-heading a {
-  color: var(--tool-purple);
+.hardware-purchase-date {
+  padding: 4px 6px;
+  border-radius: 99px;
+  background: #f0edff;
+  color: #5a4dc5;
   font-size: 10px;
   font-weight: 750;
+  white-space: nowrap;
 }
-.deployment-price-main {
+.hardware-purchase-main {
   display: flex;
   align-items: baseline;
   gap: 7px;
   margin: 15px 0 11px;
 }
-.deployment-price-main strong {
+.hardware-purchase-main strong {
   color: #1d2740;
   font-size: 25px;
   letter-spacing: -0.055em;
 }
-.deployment-price-main span {
+.hardware-purchase-main span {
   color: #778298;
   font-size: 10px;
   font-weight: 650;
 }
-.deployment-price-metrics {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  overflow: hidden;
-  border: 1px solid #e3e7ef;
-  border-radius: 9px;
-}
-.deployment-price-metrics div {
-  padding: 8px 9px;
-  border-left: 1px solid #e3e7ef;
-}
-.deployment-price-metrics div:first-child {
-  border-left: 0;
-}
-.deployment-price-metrics span,
-.deployment-price-metrics b {
-  display: block;
-}
-.deployment-price-metrics span {
-  color: #7b869c;
-  font-size: 9px;
-}
-.deployment-price-metrics b {
-  margin-top: 4px;
-  color: #273149;
-  font-size: 13px;
-  letter-spacing: -0.03em;
-}
-.deployment-price-minimum,
-.deployment-price-warning,
-.deployment-price-note,
-.deployment-price-unavailable {
+.hardware-purchase-plan,
+.hardware-purchase-basis,
+.hardware-purchase-minimum,
+.hardware-purchase-warning,
+.hardware-purchase-note,
+.hardware-purchase-status {
   margin: 10px 0 0;
   color: #657189;
   font-size: 9px;
   line-height: 1.55;
 }
-.deployment-price-minimum {
+.hardware-purchase-plan {
+  margin-top: 0;
+  color: #4c5870;
+  font-weight: 700;
+}
+.hardware-purchase-basis {
+  margin-top: 4px;
+  color: #78839a;
+}
+.hardware-purchase-minimum {
   color: #5345bd;
   font-weight: 700;
 }
-.deployment-price-warning {
+.hardware-purchase-warning {
   color: #b34d58;
   font-weight: 700;
 }
-.deployment-price-unavailable {
-  padding: 14px 0 2px;
+.hardware-purchase-status {
+  padding: 12px 0 0;
+  color: #2c3852;
+  font-size: 14px;
+  font-weight: 800;
+}
+.hardware-purchase-lines {
+  display: grid;
+  gap: 0;
+  margin-top: 12px;
+  overflow: hidden;
+  border: 1px solid #e3e7ef;
+  border-radius: 9px;
+}
+.hardware-purchase-lines > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 9px;
+  border-top: 1px solid #eef0f5;
+}
+.hardware-purchase-lines > div:first-child {
+  border-top: 0;
+}
+.hardware-purchase-lines span {
+  min-width: 0;
+  color: #59647a;
+  font-size: 9px;
+}
+.hardware-purchase-lines span small {
+  margin-left: 3px;
+  color: #98a2b7;
+  font-size: 8px;
+}
+.hardware-purchase-lines b {
+  flex: 0 0 auto;
+  color: #283249;
+  font-size: 10px;
+  letter-spacing: -0.02em;
+}
+.hardware-purchase-scope {
+  display: grid;
+  gap: 4px;
+  margin-top: 10px;
+}
+.hardware-purchase-scope span {
+  color: #6e7990;
+  font-size: 8px;
+  line-height: 1.45;
+}
+.hardware-purchase-sources {
+  margin-top: 10px;
+  border-top: 1px solid #eef0f5;
+}
+.hardware-purchase-sources summary {
+  padding: 9px 0 0;
+  color: var(--tool-purple);
+  cursor: pointer;
+  font-size: 9px;
+  font-weight: 750;
+}
+.hardware-purchase-sources ul {
+  display: grid;
+  gap: 8px;
+  margin: 9px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.hardware-purchase-sources li {
+  display: grid;
+  gap: 2px;
+  padding: 8px;
+  border-radius: 7px;
+  background: #f7f8fc;
+}
+.hardware-purchase-sources a {
+  color: #5649c5;
+  font-size: 9px;
+  font-weight: 800;
+}
+.hardware-purchase-sources b {
+  color: #3d4860;
+  font-size: 9px;
+}
+.hardware-purchase-sources span,
+.hardware-purchase-sources small {
+  color: #7c879d;
+  font-size: 8px;
+  line-height: 1.45;
+}
+.hardware-purchase-sources small {
+  color: #68748a;
 }
 
 .experience-card {

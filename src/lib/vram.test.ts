@@ -5,6 +5,7 @@ import {
   getModel,
   GPUS,
   MODELS,
+  normaliseInput,
   PRECISIONS,
 } from "./vram";
 
@@ -84,19 +85,20 @@ describe("estimateVram", () => {
     );
   });
 
-  it("includes mainstream dense and MoE model profiles", () => {
-    expect(Object.keys(MODELS)).toHaveLength(48);
+  it("keeps current flagship profiles while pruning redundant older sizes", () => {
+    expect(Object.keys(MODELS)).toHaveLength(39);
     expect(MODELS["qwen3-coder-480b-a35b"].contextWindow).toBe(262_144);
+    expect(MODELS["qwen3-6-27b"].kvElementsPerToken).toBe(32_768);
+    expect(MODELS["qwen3-6-35b-a3b"].activeParametersB).toBe(3);
     expect(MODELS["qwen2-5-72b"].layers).toBe(80);
     expect(MODELS["llama-3-1-405b"].totalParametersB).toBeCloseTo(
       405.853,
     );
-    expect(MODELS["deepseek-v3"].activeParametersB).toBe(37);
-    expect(MODELS["deepseek-r1-distill-qwen-1-5b"].totalParametersB).toBe(
-      1.777,
-    );
+    expect(MODELS["deepseek-v4-flash"].totalParametersB).toBe(284);
+    expect(MODELS["deepseek-v4-pro"].activeParametersB).toBe(49);
     expect(MODELS["deepseek-r1-32b"].totalParametersB).toBeCloseTo(32.764);
-    expect(MODELS["deepseek-r1-distill-llama-70b"].layers).toBe(80);
+    expect(MODELS["glm-5-2"].contextWindow).toBe(1_048_576);
+    expect(MODELS["glm-5-2"].kvElementsPerToken).toBe(47_616);
     expect(MODELS["ernie-4-5-300b-a47b"].category).toBe(
       "Hunyuan / ERNIE / MiniMax",
     );
@@ -104,6 +106,16 @@ describe("estimateVram", () => {
       2 * 12 * 8 * 64,
     );
     expect(MODELS["gemma-3-27b"].category).toBe("Gemma");
+    expect("deepseek-v3" in MODELS).toBe(false);
+    expect("glm-4-5" in MODELS).toBe(false);
+  });
+
+  it("keeps shared links usable after replacing old model presets", () => {
+    const legacyConfig = JSON.parse(
+      '{"modelId":"deepseek-v3"}',
+    ) as Record<string, unknown>;
+
+    expect(normaliseInput(legacyConfig).modelId).toBe("deepseek-v4-flash");
   });
 
   it("includes mainstream local, workstation, data-center, Apple and accelerator devices", () => {
@@ -130,7 +142,7 @@ describe("estimateVram", () => {
   it("does not suggest impossible multi-machine scaling for unified memory", () => {
     const estimate = estimateVram({
       ...baseline,
-      modelId: "deepseek-v3",
+      modelId: "deepseek-v4-pro",
       weightPrecision: "int4",
       gpuId: "dgx-spark-128",
     });
