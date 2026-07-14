@@ -7,6 +7,7 @@ import {
   type CSSProperties,
   type ReactNode,
 } from "react";
+import { ArrowUpRight, Copy, Share2 } from "lucide-react";
 import { CalculatorFaq } from "./CalculatorFaq";
 import { HardwarePurchaseBudget } from "./HardwarePurchaseBudget";
 import { InferenceExperience } from "./InferenceExperience";
@@ -266,7 +267,7 @@ export function VramCalculator() {
           onClick={() => void copyShare()}
           aria-label="复制分享链接"
         >
-          分享 ↗
+          分享 <Share2 size={13} aria-hidden />
         </button>
       </header>
 
@@ -511,13 +512,13 @@ export function VramCalculator() {
           <div className="result-stack">
             <aside className="result-card" aria-live="polite">
               <div className="result-card-top">
-                <span>
+                <span className={`result-status is-${safetyTier(displaySafety)}`}>
                   {contextExceedsWindow
                     ? "超过模型窗口"
                     : statusLabels[displaySafety]}
                 </span>
                 <button type="button" onClick={() => void copySummary()}>
-                  复制
+                  <Copy size={12} aria-hidden /> 复制
                 </button>
               </div>
               <div className="result-main">
@@ -541,6 +542,8 @@ export function VramCalculator() {
                   </p>
                 </div>
               </div>
+
+              <p className="result-tier-label">显存构成</p>
               <div className="result-bar">
                 <i
                   className="weights"
@@ -565,6 +568,9 @@ export function VramCalculator() {
                 <ResultPart label="工作区" value={parts.workspace} />
                 <ResultPart label="运行时 / 预留" value={runtime} />
               </div>
+
+              <hr className="result-tier-divider" />
+              <p className="result-tier-label">吞吐性能（非实测）</p>
               <div className="result-metrics">
                 <Metric
                   label="估算吞吐"
@@ -588,7 +594,7 @@ export function VramCalculator() {
                 />
               </div>
               <p className="result-performance-note">
-                非实测 · 瓶颈：{estimate.performance.bottleneck} · 并发饱和
+                瓶颈：{estimate.performance.bottleneck} · 并发饱和
                 {Math.round(estimate.performance.batchSaturation * 100)}%
               </p>
             </aside>
@@ -617,7 +623,7 @@ export function VramCalculator() {
             target="_blank"
             rel="noreferrer"
           >
-            纠错 / 提交 Issue ↗
+            纠错 / 提交 Issue <ArrowUpRight size={12} aria-hidden />
           </a>
         </div>
         <span>
@@ -754,7 +760,13 @@ function formatThroughputRange(low: number, high: number) {
 }
 
 function dialColor(safety: keyof typeof statusLabels) {
-  if (safety === "oom" || safety === "tight") return "#ff7780";
-  if (safety === "caution") return "#f6b74a";
-  return "#bfef75";
+  if (safety === "oom" || safety === "tight") return "var(--tool-status-danger)";
+  if (safety === "caution") return "var(--tool-status-caution)";
+  return "var(--tool-status-ok)";
+}
+
+function safetyTier(safety: keyof typeof statusLabels) {
+  if (safety === "oom" || safety === "tight") return "danger";
+  if (safety === "caution") return "caution";
+  return "ok";
 }

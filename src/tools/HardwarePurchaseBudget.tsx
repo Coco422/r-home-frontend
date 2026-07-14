@@ -1,3 +1,4 @@
+import { ArrowUpRight } from "lucide-react";
 import {
   HARDWARE_PURCHASE_AS_OF,
   estimatePurchaseBudget,
@@ -88,7 +89,7 @@ export function HardwarePurchaseBudget({
             {sources.map(({ sourceId, source }) => (
               <li key={sourceId}>
                 <a href={source.url} target="_blank" rel="noreferrer">
-                  {source.seller} ↗
+                  {source.seller} <ArrowUpRight size={11} aria-hidden />
                 </a>
                 <b>{source.label}</b>
                 <span>

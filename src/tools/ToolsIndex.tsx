@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { ArrowRight, Gauge } from "lucide-react";
 
 export function ToolsIndex() {
   useEffect(() => {
@@ -23,15 +24,16 @@ export function ToolsIndex() {
           href="/tools/vram-calculator"
         >
           <div className="tool-card-icon" aria-hidden="true">
-            <span />
-            <span />
-            <span />
+            <Gauge size={22} aria-hidden />
           </div>
           <div className="tool-card-copy">
             <p>AI / 推理</p>
             <h1>LLM 显存计算器</h1>
             <span>
-              显存 · 速度 · 分享 <b>进入 →</b>
+              显存 · 速度 · 分享{" "}
+              <b>
+                进入 <ArrowRight size={13} aria-hidden />
+              </b>
             </span>
           </div>
         </a>

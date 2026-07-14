@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { Circle } from "lucide-react";
 import {
   getInferenceSegments,
   promptForMode,
@@ -286,9 +287,7 @@ export function InferenceExperience({ config }: Props) {
 
       <div className="experience-terminal">
         <div className="experience-terminal-bar">
-          <span />
-          <span />
-          <span />
+          <Circle size={8} fill="currentColor" aria-hidden />
           <b>{mode === "agent" ? "agent.run" : "chat.completion"}</b>
           <small>
             {formatTokens(inputTokens)} · {tokensPerSecond} tok/s

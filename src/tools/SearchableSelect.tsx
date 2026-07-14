@@ -7,6 +7,7 @@ import {
   type CSSProperties,
   type KeyboardEvent,
 } from "react";
+import { ChevronDown } from "lucide-react";
 
 export type SearchableOption<Value extends string = string> = {
   value: Value;
@@ -170,7 +171,7 @@ export function SearchableSelect<Value extends string>({
         }}
       >
         <span>{selected?.label ?? placeholder}</span>
-        <i aria-hidden="true">⌄</i>
+        <ChevronDown size={16} aria-hidden />
       </button>
 
       {isOpen ? (

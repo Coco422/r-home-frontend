@@ -1,3 +1,4 @@
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { HARDWARE_PURCHASE_AS_OF } from "../lib/hardware-purchase";
 
 const FAQ_ITEMS = [
@@ -57,7 +58,7 @@ export function CalculatorFaq() {
           target="_blank"
           rel="noreferrer"
         >
-          计算口径 ↗
+          计算口径 <ArrowUpRight size={11} aria-hidden />
         </a>
       </div>
       <div className="faq-grid">
@@ -65,7 +66,7 @@ export function CalculatorFaq() {
           <details key={item.question} className="faq-card">
             <summary>
               <span>{item.question}</span>
-              <i aria-hidden="true">+</i>
+              <ChevronDown size={16} aria-hidden />
             </summary>
             <p>{item.answer}</p>
           </details>
