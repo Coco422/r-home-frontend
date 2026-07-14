@@ -1,4 +1,6 @@
 import {
+  cloneElement,
+  isValidElement,
   useEffect,
   useMemo,
   useState,
@@ -8,6 +10,10 @@ import {
 import { CalculatorFaq } from "./CalculatorFaq";
 import { DeploymentPrice } from "./DeploymentPrice";
 import { InferenceExperience } from "./InferenceExperience";
+import {
+  SearchableSelect,
+  type SearchableOption,
+} from "./SearchableSelect";
 import {
   DEFAULT_CALCULATOR_INPUT,
   GPUS,
@@ -116,6 +122,42 @@ const statusLabels = {
   oom: "预计 OOM",
 };
 
+const MODEL_OPTIONS: SearchableOption<ModelId>[] = MODEL_CATEGORIES.flatMap(
+  (category) =>
+    Object.entries(MODELS).flatMap(([id, model]) =>
+      model.category === category
+        ? [
+            {
+              value: id as ModelId,
+              label: model.label,
+              group: category,
+              keywords: `${model.attention} ${model.contextWindow}`,
+            },
+          ]
+        : [],
+    ),
+);
+
+const GPU_OPTIONS: SearchableOption<GpuId>[] = GPU_CATEGORIES.flatMap(
+  (category) =>
+    Object.entries(GPUS).flatMap(([id, gpu]) =>
+      gpu.category === category
+        ? [
+            {
+              value: id as GpuId,
+              label: `${gpu.label} · ${gpu.memoryGiB} GiB${
+                "memoryType" in gpu ? " UMA" : ""
+              }`,
+              group: category,
+              keywords: `${category} ${gpu.memoryGiB} GiB ${gpu.memoryGiB}GB ${
+                "memoryType" in gpu ? gpu.memoryType : ""
+              }`,
+            },
+          ]
+        : [],
+    ),
+);
+
 function loadConfig() {
   const fromHash = configFromHash(window.location.hash);
   if (fromHash) return normaliseInput(fromHash);
@@ -214,19 +256,6 @@ export function VramCalculator() {
     estimate.totalPerGpuGiB - parts.weights - parts.kv - parts.workspace,
   );
   const visualMax = Math.max(estimate.totalPerGpuGiB, estimate.gpu.memoryGiB);
-  const modelCategoryOptions = MODEL_CATEGORIES.map((category) => ({
-    category,
-    models: Object.entries(MODELS).filter(
-      ([, model]) => model.category === category,
-    ),
-  })).filter((group) => group.models.length > 0);
-  const categoryOptions = GPU_CATEGORIES.map((category) => ({
-    category,
-    devices: Object.entries(GPUS).filter(
-      ([, gpu]) => gpu.category === category,
-    ),
-  })).filter((group) => group.devices.length > 0);
-
   return (
     <div className="calculator-page">
       <header className="calculator-topbar calculator-shell">
@@ -260,22 +289,12 @@ export function VramCalculator() {
             <ConfigSection title="模型">
               <div className="compact-fields three">
                 <Field label="模型">
-                  <select
+                  <SearchableSelect
                     value={config.modelId}
-                    onChange={(event) =>
-                      update({ modelId: event.target.value as ModelId })
-                    }
-                  >
-                    {modelCategoryOptions.map(({ category, models }) => (
-                      <optgroup key={category} label={category}>
-                        {models.map(([id, model]) => (
-                          <option key={id} value={id}>
-                            {model.label}
-                          </option>
-                        ))}
-                      </optgroup>
-                    ))}
-                  </select>
+                    options={MODEL_OPTIONS}
+                    placeholder="选择模型"
+                    onChange={(modelId) => update({ modelId })}
+                  />
                 </Field>
                 <Field label="权重">
                   <select
@@ -352,23 +371,12 @@ export function VramCalculator() {
             <ConfigSection title="设备">
               <div className="compact-fields two">
                 <Field label="设备">
-                  <select
+                  <SearchableSelect
                     value={config.gpuId}
-                    onChange={(event) =>
-                      update({ gpuId: event.target.value as GpuId })
-                    }
-                  >
-                    {categoryOptions.map(({ category, devices }) => (
-                      <optgroup key={category} label={category}>
-                        {devices.map(([id, gpu]) => (
-                          <option key={id} value={id}>
-                            {gpu.label} · {gpu.memoryGiB} GiB
-                            {"memoryType" in gpu ? " UMA" : ""}
-                          </option>
-                        ))}
-                      </optgroup>
-                    ))}
-                  </select>
+                    options={GPU_OPTIONS}
+                    placeholder="选择设备"
+                    onChange={(gpuId) => update({ gpuId })}
+                  />
                 </Field>
                 <Field label="数量">
                   <select
@@ -622,11 +630,15 @@ function ConfigSection({
 }
 
 function Field({ label, children }: { label: string; children: ReactNode }) {
+  const labelledChild = isValidElement<{ "aria-label"?: string }>(children)
+    ? cloneElement(children, { "aria-label": label })
+    : children;
+
   return (
-    <label className="compact-field">
+    <div className="compact-field">
       <span>{label}</span>
-      {children}
-    </label>
+      {labelledChild}
+    </div>
   );
 }
 
@@ -636,16 +648,19 @@ function NumberInput({
   max,
   step = 1,
   onChange,
+  "aria-label": ariaLabel,
 }: {
   value: number;
   min: number;
   max: number;
   step?: number;
   onChange: (value: number) => void;
+  "aria-label"?: string;
 }) {
   return (
     <input
       type="number"
+      aria-label={ariaLabel}
       value={value}
       min={min}
       max={max}

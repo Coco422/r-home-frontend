@@ -24,6 +24,7 @@
 - [src/lib/deployment-pricing.ts](src/lib/deployment-pricing.ts)：公开云端按需价格快照与小时、日、月部署成本估算
 - [src/lib/share.ts](src/lib/share.ts)：URL-safe 配置编解码
 - [src/tools/VramCalculator.tsx](src/tools/VramCalculator.tsx)：交互、预设、结果卡与设备选择
+- [src/tools/SearchableSelect.tsx](src/tools/SearchableSelect.tsx)：模型与设备的分组搜索选择器
 - [src/tools/InferenceExperience.tsx](src/tools/InferenceExperience.tsx)：问答 / Agent 打字机式推理体验
 
 公式将权重和 KV 精度分开。普通 decoder-only 架构的 KV Cache 近似为：
