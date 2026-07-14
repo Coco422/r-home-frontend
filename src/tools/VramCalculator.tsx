@@ -600,7 +600,16 @@ export function VramCalculator() {
         <CalculatorFaq />
       </main>
       <footer className="calculator-footer calculator-shell">
-        <a href="/tools/">Ray / 工具</a>
+        <div className="calculator-footer-links">
+          <a href="/tools/">Ray / 工具</a>
+          <a
+            href="https://github.com/Coco422/r-home-frontend/issues/new"
+            target="_blank"
+            rel="noreferrer"
+          >
+            纠错 / 提交 Issue ↗
+          </a>
+        </div>
         <span>
           {estimate.minimumGpuCount
             ? `最少 ${estimate.minimumGpuCount} ${isUnifiedMemory ? "台" : "张"}`

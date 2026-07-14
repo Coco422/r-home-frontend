@@ -38,9 +38,13 @@
 
 模型目录当前提供 39 个常用 dense / MoE 档位；相同尺寸的旧代模型会让位给较新的代表项。最新加入的 [Qwen3.6 27B](https://huggingface.co/Qwen/Qwen3.6-27B)、[Qwen3.6 35B-A3B](https://huggingface.co/Qwen/Qwen3.6-35B-A3B)、[DeepSeek-V4 Flash](https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash)、[DeepSeek-V4 Pro](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro) 和 [GLM-5.2](https://huggingface.co/zai-org/GLM-5.2) 均以官方模型卡与 `config.json` 核验。混合注意力、压缩 KV 或循环状态模型会在选项中明确标记为近似估算，避免把普通 GQA 公式套用到不兼容架构。
 
-硬件购置预算是静态参考数据，不是云租赁费：它按可核验的 GPU 公开价加上服务器平台预留，拆开显示 CPU、内存、主板、SSD、机箱 / 电源 / 散热和基础网络。GPU 来源、市场、价格条件与链接都保存在 `hardware-purchase.ts`，并会在页面的「来源与口径」中展开。中国大陆及海外公开页面统一在 **2026-07-14** 整理；库存、地区、税率、二手成色、进口、保修与整机配置会改变成交价，必须以供应商书面报价为准。
+硬件购置预算是静态参考数据，不是云租赁费：它按可核验的 GPU / 整机公开价加上服务器平台预留，拆开显示 CPU、内存、主板、SSD、机箱 / 电源 / 散热和基础网络。目录覆盖主流消费卡（4060 Ti、5060 Ti 16GB、4070 SUPER、4080 SUPER、4090、5070 / Ti、5080）、专业卡 / 数据中心卡（RTX A5000/A6000、RTX 6000 Ada、RTX PRO 4000–6000、A100 80GB、H100 PCIe、L40S）以及 Mac Studio M3 Ultra 96GB、M4 Max 64GB 和 ASUS DGX Spark（Ascent GX10）等精确 SKU。
+
+每条来源都会显示原始币种金额、报价快照日、市场、口径和可点击链接；页面在 **2026-07-14** 汇总。海外美元零售价按固定 **¥7.18 / US$** 换算。只有准确 SKU 的公开成交 / 零售价会进入整机预算；历史发布价、报道价或混合 SKU 页面仍保留作参考，但不会被自动相加。库存、地区、税率、二手成色、进口、保修与整机配置都会改变成交价，必须以供应商书面报价为准。发现来源或价格有误可在页面底部提交 [GitHub Issue](https://github.com/Coco422/r-home-frontend/issues/new)。
 
 对于统一内存设备、SXM / HGX、没有准确 SKU 的整机和多节点方案，计算器会明确显示「需询价」或「暂未收录」，不会把 GPU 单价线性相加，也不会用 ¥0 伪造总成本。
+
+历史首发价、官方 MSRP 等非实时价格仍会展示原始金额与来源，但不会被自动相加为「整机总价」。
 
 ## 本地开发
 

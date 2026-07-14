@@ -4,6 +4,7 @@ import {
   getPurchaseSources,
   type PriceRange,
   type PurchasePlan,
+  type PurchaseSource,
 } from "../lib/hardware-purchase";
 import type { GpuId } from "../lib/vram";
 
@@ -53,14 +54,10 @@ export function HardwarePurchaseBudget({
         <>
           <div className="hardware-purchase-main">
             <strong>约 {formatCny(plan.total.typicalCny)}</strong>
-            <span>{formatRange(plan.total)} · 整机</span>
+            <span>{formatRange(plan.total)} · 整机预算</span>
           </div>
           <p className="hardware-purchase-plan">{plan.planLabel}</p>
-          {plan.priceBasis ? (
-            <p className="hardware-purchase-basis">
-              {plan.priceBasis}；CPU、内存、存储和供电为静态平台预留。
-            </p>
-          ) : null}
+          <PurchaseBasis plan={plan} />
           {usesMinimumPlan ? (
             <p className="hardware-purchase-minimum">
               当前 {gpuCount} GPU 预计 OOM；已按最少 {plan.gpuCount} GPU 的可运行方案计算。
@@ -76,6 +73,7 @@ export function HardwarePurchaseBudget({
         <>
           <p className="hardware-purchase-status">{statusTitle(plan)}</p>
           <p className="hardware-purchase-plan">{plan.planLabel}</p>
+          <PurchaseBasis plan={plan} />
           {plan.message ? (
             <p className="hardware-purchase-warning">{plan.message}</p>
           ) : null}
@@ -94,7 +92,12 @@ export function HardwarePurchaseBudget({
                 </a>
                 <b>{source.label}</b>
                 <span>
-                  {source.checkedOn} · {source.market} · {source.condition}
+                  {source.quotedPrice
+                    ? `${formatQuotedPrice(source)} · `
+                    : ""}
+                  {source.quotedOn
+                    ? `报价快照 ${source.quotedOn}`
+                    : `整理 ${source.checkedOn}`} · {source.market} · {source.condition}
                 </span>
                 <small>{source.note}</small>
               </li>
@@ -117,6 +120,7 @@ function PurchaseLines({ plan }: { plan: PurchasePlan }) {
           <span>
             {line.label}
             <small>
+              {line.isEstimate ? "平台预留 · " : ""}
               × {line.quantity} {line.unit}
             </small>
           </span>
@@ -133,6 +137,18 @@ function Scope({ plan }: { plan: PurchasePlan }) {
       <span>已含：{plan.included.join("、")}</span>
       <span>未含：{plan.excluded.join("、")}</span>
     </div>
+  );
+}
+
+function PurchaseBasis({ plan }: { plan: PurchasePlan }) {
+  if (!plan.priceBasis) return null;
+  return (
+    <p className="hardware-purchase-basis">
+      {plan.priceBasis}；
+      {plan.isAppliance
+        ? "完整整机，不叠加服务器平台预算。"
+        : "CPU、内存、存储和供电为静态平台预留。"}
+    </p>
   );
 }
 
@@ -161,4 +177,14 @@ function formatCny(value: number) {
 function formatRange(value: PriceRange) {
   if (value.lowCny === value.highCny) return formatCny(value.typicalCny);
   return `${formatCny(value.lowCny)}–${formatCny(value.highCny)}`;
+}
+
+function formatQuotedPrice(source: PurchaseSource) {
+  const price = source.quotedPrice;
+  if (!price) return "";
+  const amount = price.amount.toLocaleString("zh-CN", {
+    maximumFractionDigits: 2,
+  });
+  const currency = price.currency === "CNY" ? "¥" : "US$";
+  return `${currency}${amount}${price.qualifier ? ` ${price.qualifier}` : ""}`;
 }
