@@ -36,6 +36,10 @@
 
 这是一项部署前容量估算，不是兼容性或实测性能保证；请在目标模型、推理引擎、驱动和硬件上压测验证。
 
+吞吐现在显示为区间，并把权重带宽 / 计算瓶颈、多卡并行效率和并发饱和度拆开；它仍不是 vLLM、TensorRT-LLM、llama.cpp 或具体网络拓扑的实测 benchmark。请求的输入 token、输出 token、批量和并发不设产品级上限，只有非负 / 正数和 JavaScript 安全整数约束；模型自身上下文窗口仍会单独提示超限。
+
+「CPU 权重卸载」按分层权重卸载的容量近似计算：GPU 保留未卸载权重，CPU 内存承接卸载部分。紧凑、均衡、保守只代表显存碎片和安全余量，不会自动推导 PCIe / NVLink、层切分或具体引擎的传输速度。
+
 模型目录当前提供 39 个常用 dense / MoE 档位；相同尺寸的旧代模型会让位给较新的代表项。最新加入的 [Qwen3.6 27B](https://huggingface.co/Qwen/Qwen3.6-27B)、[Qwen3.6 35B-A3B](https://huggingface.co/Qwen/Qwen3.6-35B-A3B)、[DeepSeek-V4 Flash](https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash)、[DeepSeek-V4 Pro](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro) 和 [GLM-5.2](https://huggingface.co/zai-org/GLM-5.2) 均以官方模型卡与 `config.json` 核验。混合注意力、压缩 KV 或循环状态模型会在选项中明确标记为近似估算，避免把普通 GQA 公式套用到不兼容架构。
 
 硬件购置预算是静态参考数据，不是云租赁费：它按可核验的 GPU / 整机公开价加上服务器平台预留，拆开显示 CPU、内存、主板、SSD、机箱 / 电源 / 散热和基础网络。目录覆盖主流消费卡（4060 Ti、5060 Ti 16GB、4070 SUPER、4080 SUPER、4090、5070 / Ti、5080）、专业卡 / 数据中心卡（RTX A5000/A6000、RTX 6000 Ada、RTX PRO 4000–6000、A100 80GB、H100 PCIe、L40S）以及 Mac Studio M3 Ultra 96GB、M4 Max 64GB 和 ASUS DGX Spark（Ascent GX10）等精确 SKU。

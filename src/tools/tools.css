@@ -485,6 +485,12 @@
 .config-inline-actions .compact-field {
   min-width: 94px;
 }
+.cpu-offload-note {
+  margin: 10px 0 0;
+  color: #78839a;
+  font-size: 9px;
+  line-height: 1.55;
+}
 .compact-toggle {
   display: inline-flex;
   align-items: center;
@@ -672,6 +678,12 @@
 .result-metrics small {
   color: #9aa6c4;
   font-size: 8px;
+}
+.result-performance-note {
+  margin: 9px 1px 0;
+  color: #9da9c5;
+  font-size: 9px;
+  line-height: 1.5;
 }
 
 .hardware-purchase {

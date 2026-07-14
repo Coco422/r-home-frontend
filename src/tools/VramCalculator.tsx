@@ -433,8 +433,7 @@ export function VramCalculator() {
                 <Field label="输入 token">
                   <NumberInput
                     value={config.contextTokens}
-                    min={64}
-                    max={1_000_000}
+                    min={0}
                     step={512}
                     onChange={(value) => update({ contextTokens: value })}
                   />
@@ -442,8 +441,7 @@ export function VramCalculator() {
                 <Field label="输出 token">
                   <NumberInput
                     value={config.outputTokens}
-                    min={1}
-                    max={131072}
+                    min={0}
                     step={128}
                     onChange={(value) => update({ outputTokens: value })}
                   />
@@ -452,7 +450,6 @@ export function VramCalculator() {
                   <NumberInput
                     value={config.batchSize}
                     min={1}
-                    max={128}
                     onChange={(value) => update({ batchSize: value })}
                   />
                 </Field>
@@ -460,7 +457,6 @@ export function VramCalculator() {
                   <NumberInput
                     value={config.concurrency}
                     min={1}
-                    max={128}
                     onChange={(value) => update({ concurrency: value })}
                   />
                 </Field>
@@ -474,7 +470,7 @@ export function VramCalculator() {
                       update({ cpuOffload: event.target.checked })
                     }
                   />
-                  <span /> CPU 卸载
+                  <span /> CPU 权重卸载
                 </label>
                 {config.cpuOffload ? (
                   <Field label="卸载 %">
@@ -502,6 +498,13 @@ export function VramCalculator() {
                   </select>
                 </Field>
               </div>
+              {config.cpuOffload ? (
+                <p className="cpu-offload-note">
+                  分层权重卸载（CPU RAM ↔ GPU）· 预计占用 CPU 内存
+                  {formatGiB(estimate.offload.cpuMemoryGiB)} GiB；仅作容量近似，实际速度取决于
+                  Accelerate / device_map、llama.cpp、PCIe / NVLink 与层切分。
+                </p>
+              ) : null}
             </ConfigSection>
           </section>
 
@@ -564,8 +567,11 @@ export function VramCalculator() {
               </div>
               <div className="result-metrics">
                 <Metric
-                  label="总吞吐"
-                  value={formatNumber(estimate.performance.totalTokensPerSecond)}
+                  label="估算吞吐"
+                  value={formatThroughputRange(
+                    estimate.performance.lowTokensPerSecond,
+                    estimate.performance.highTokensPerSecond,
+                  )}
                   unit="tok/s"
                 />
                 <Metric
@@ -574,13 +580,17 @@ export function VramCalculator() {
                   unit="ms"
                 />
                 <Metric
-                  label="每用户"
+                  label="每用户（中心）"
                   value={formatNumber(
                     estimate.performance.perUserTokensPerSecond,
                   )}
                   unit="tok/s"
                 />
               </div>
+              <p className="result-performance-note">
+                非实测 · 瓶颈：{estimate.performance.bottleneck} · 并发饱和
+                {Math.round(estimate.performance.batchSaturation * 100)}%
+              </p>
             </aside>
             <HardwarePurchaseBudget
               gpuId={config.gpuId}
@@ -663,8 +673,8 @@ function NumberInput({
   "aria-label": ariaLabel,
 }: {
   value: number;
-  min: number;
-  max: number;
+  min?: number;
+  max?: number;
   step?: number;
   onChange: (value: number) => void;
   "aria-label"?: string;
@@ -728,7 +738,7 @@ function size(value: number, max: number) {
   return `${Math.max(value > 0 ? 0.5 : 0, Math.min(100, (value / max) * 100))}%`;
 }
 
-function clamp(value: string, min: number, max: number) {
+function clamp(value: string, min = 0, max = Number.MAX_SAFE_INTEGER) {
   const number = Number(value);
   return Number.isFinite(number) ? Math.min(max, Math.max(min, number)) : min;
 }
@@ -737,6 +747,10 @@ function formatNumber(value: number) {
   return value.toLocaleString("zh-CN", {
     maximumFractionDigits: value >= 100 ? 0 : 1,
   });
+}
+
+function formatThroughputRange(low: number, high: number) {
+  return `${formatNumber(low)}–${formatNumber(high)}`;
 }
 
 function dialColor(safety: keyof typeof statusLabels) {

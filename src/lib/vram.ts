@@ -1669,7 +1669,12 @@ export type GpuDefinition = {
   supportsMultiGpu?: boolean;
 };
 
-function inRange(value: unknown, fallback: number, min: number, max: number) {
+function inRange(
+  value: unknown,
+  fallback: number,
+  min: number,
+  max = Number.MAX_SAFE_INTEGER,
+) {
   const numeric = Number(value);
   return Number.isFinite(numeric)
     ? Math.min(Math.max(numeric, min), max)
@@ -1718,12 +1723,10 @@ export function normaliseInput(
     ),
     reserve: idFrom(RESERVES, merged.reserve, DEFAULT_CALCULATOR_INPUT.reserve),
     gpuCount,
-    contextTokens: Math.round(
-      inRange(merged.contextTokens, 4096, 64, 1_000_000),
-    ),
-    outputTokens: Math.round(inRange(merged.outputTokens, 1024, 1, 131_072)),
-    batchSize: Math.round(inRange(merged.batchSize, 1, 1, 128)),
-    concurrency: Math.round(inRange(merged.concurrency, 1, 1, 128)),
+    contextTokens: Math.round(inRange(merged.contextTokens, 4096, 0)),
+    outputTokens: Math.round(inRange(merged.outputTokens, 1024, 0)),
+    batchSize: Math.round(inRange(merged.batchSize, 1, 1)),
+    concurrency: Math.round(inRange(merged.concurrency, 1, 1)),
     offloadPercent: inRange(merged.offloadPercent, 45, 5, 95),
     customParametersB: inRange(merged.customParametersB, 8, 0.1, 2_000),
     customLayers: Math.round(inRange(merged.customLayers, 32, 1, 512)),
@@ -1822,12 +1825,14 @@ function performanceEstimate({
   model,
   weightsGiB,
   totalPerGpuGiB,
+  effectiveSequences,
 }: {
   config: CalculatorInput;
   gpu: GpuDefinition;
   model: ModelDefinition;
   weightsGiB: number;
   totalPerGpuGiB: number;
+  effectiveSequences: number;
 }) {
   const precisionGain: Record<PrecisionId, number> = {
     fp32: 0.5,
@@ -1845,18 +1850,50 @@ function performanceEstimate({
   const computeBound =
     (gpu.tflops * config.gpuCount * 500) /
     Math.max(model.activeParametersB, 0.1);
-  const batchingGain =
-    1 +
-    Math.min(0.32, Math.log2(config.batchSize * config.concurrency) * 0.075);
+  // A single sequence rarely saturates a large tensor-parallel cluster. This
+  // is deliberately a saturation curve, not a claim about a specific engine.
+  const batchSaturation =
+    0.68 +
+    0.32 *
+      (1 -
+        Math.exp(
+          -effectiveSequences /
+            Math.max(4, 8 + Math.sqrt(config.gpuCount) * 0.75),
+        ));
+  // Without an explicit topology input, assume a well-connected single node
+  // and expose the efficiency so users do not mistake linear GPU scaling for
+  // a measured benchmark. Cross-node Ethernet can be materially lower.
+  const parallelEfficiency =
+    config.gpuCount === 1
+      ? 1
+      : Math.max(0.68, 0.96 - 0.022 * Math.log2(config.gpuCount));
   const contextPenalty =
     1 / (1 + Math.max(0, config.contextTokens - 4096) / 180_000);
   const offloadPenalty = config.cpuOffload
     ? 1 + (config.offloadPercent / 100) * 1.75
     : 1;
+  const rooflineTokensPerSecond = Math.max(
+    0.1,
+    Math.min(memoryBound, computeBound),
+  );
   const totalTokensPerSecond = Math.max(
     0.1,
-    (Math.min(memoryBound, computeBound) * batchingGain * contextPenalty) /
+    (rooflineTokensPerSecond *
+      parallelEfficiency *
+      batchSaturation *
+      contextPenalty) /
       offloadPenalty,
+  );
+  const lowTokensPerSecond = Math.max(
+    0.1,
+    totalTokensPerSecond * (config.cpuOffload ? 0.4 : 0.55),
+  );
+  const highTokensPerSecond = Math.max(
+    totalTokensPerSecond,
+    Math.min(
+      rooflineTokensPerSecond * contextPenalty,
+      totalTokensPerSecond * (config.cpuOffload ? 1.2 : 1.5),
+    ),
   );
   const perUserTokensPerSecond = totalTokensPerSecond / config.concurrency;
   const timeToFirstTokenMs =
@@ -1869,6 +1906,12 @@ function performanceEstimate({
 
   return {
     totalTokensPerSecond,
+    lowTokensPerSecond,
+    highTokensPerSecond,
+    rooflineTokensPerSecond,
+    parallelEfficiency,
+    batchSaturation,
+    bottleneck: memoryBound <= computeBound ? "权重带宽" : "计算",
     perUserTokensPerSecond,
     timeToFirstTokenMs,
   };
@@ -1949,7 +1992,16 @@ export function estimateVram(input: Partial<CalculatorInput> = {}) {
     model,
     weightsGiB,
     totalPerGpuGiB: layout.totalPerGpuGiB,
+    effectiveSequences,
   });
+
+  const offload = {
+    method: config.cpuOffload ? "分层权重卸载（CPU RAM ↔ GPU）" : "未启用",
+    cpuMemoryGiB: config.cpuOffload
+      ? weightsGiB * (config.offloadPercent / 100)
+      : 0,
+    capacityOnly: true,
+  } as const;
 
   return {
     config,
@@ -1980,6 +2032,7 @@ export function estimateVram(input: Partial<CalculatorInput> = {}) {
     safety,
     minimumGpuCount,
     performance,
+    offload,
   };
 }
 

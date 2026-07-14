@@ -149,4 +149,63 @@ describe("estimateVram", () => {
 
     expect(estimate.minimumGpuCount).toBeNull();
   });
+
+  it("preserves large manually entered request and concurrency values", () => {
+    const estimate = estimateVram({
+      ...baseline,
+      contextTokens: 2_000_000,
+      outputTokens: 500_000,
+      batchSize: 256,
+      concurrency: 512,
+    });
+
+    expect(estimate.config.contextTokens).toBe(2_000_000);
+    expect(estimate.config.outputTokens).toBe(500_000);
+    expect(estimate.config.batchSize).toBe(256);
+    expect(estimate.config.concurrency).toBe(512);
+  });
+
+  it("exposes a range and multi-GPU assumptions for large-model throughput", () => {
+    const one = estimateVram({
+      ...baseline,
+      modelId: "deepseek-v4-pro",
+      gpuId: "a100-80",
+      gpuCount: 32,
+      weightPrecision: "int4",
+      contextTokens: 4096,
+      outputTokens: 1024,
+      concurrency: 1,
+    });
+    const busy = estimateVram({ ...one.config, concurrency: 16 });
+
+    expect(one.performance.lowTokensPerSecond).toBeLessThan(
+      one.performance.totalTokensPerSecond,
+    );
+    expect(one.performance.highTokensPerSecond).toBeGreaterThan(
+      one.performance.totalTokensPerSecond,
+    );
+    expect(one.performance.parallelEfficiency).toBeLessThan(1);
+    expect(busy.performance.batchSaturation).toBeGreaterThan(
+      one.performance.batchSaturation,
+    );
+    expect(busy.performance.perUserTokensPerSecond).toBeLessThan(
+      busy.performance.totalTokensPerSecond,
+    );
+  });
+
+  it("labels CPU offload as a capacity approximation with host-memory demand", () => {
+    const estimate = estimateVram({
+      ...baseline,
+      modelId: "deepseek-v4-pro",
+      gpuId: "a100-80",
+      gpuCount: 32,
+      weightPrecision: "int4",
+      cpuOffload: true,
+      offloadPercent: 45,
+    });
+
+    expect(estimate.offload.method).toContain("分层权重卸载");
+    expect(estimate.offload.cpuMemoryGiB).toBeGreaterThan(0);
+    expect(estimate.offload.capacityOnly).toBe(true);
+  });
 });
